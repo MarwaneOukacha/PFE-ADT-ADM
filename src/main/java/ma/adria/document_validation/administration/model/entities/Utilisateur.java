@@ -1,39 +1,44 @@
 package ma.adria.document_validation.administration.model.entities;
 
 import java.sql.Date;
+import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+import ma.adria.document_validation.administration.model.enums.UserProfile;
+import ma.adria.document_validation.administration.model.enums.UserStatus;
+
 @Entity(name = "utilisateurs")
-@Data @NoArgsConstructor @AllArgsConstructor
-public class Utilisateur {
-	@Id @GeneratedValue
-	private long ID;
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder(toBuilder = true)
+public class Utilisateur extends AbstractEntity{
 	@Column(nullable = false)
 	private String prenom;
 	@Column(nullable = false)
 	private String nom;
 	@Column(nullable = false)
-	private String num_tele;
+	private String numTele;
 	@Column(unique = true,nullable = false)
 	private String email;
-	private String profil;	
+	@Enumerated(EnumType.STRING)
+	private UserProfile profil;
 	@Column(nullable = false)
 	private String password;
-	@Column(nullable = false)
-	private String keycloak_id;
+	@Column(nullable = true,unique = true)
+	private String keycloakId;
 	@Column(nullable = true)
-	private String statut;
+	@Enumerated(EnumType.STRING)
+	private UserStatus statut;
 	@Column(nullable = true)
-	private Date email_validated_at;
+	private Date emailValidatedAt;
 	@Column(nullable = false)
-	private int nbr_max_transactions;
+	private int nbrMaxTransactions;
 	@Column(nullable = false)
-	private int size_max;
+	private int sizeMax;
 }

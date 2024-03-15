@@ -36,6 +36,13 @@ app:
     users: ${app.key_cloak.baseUrl}/auth/admin/realms/${app.key_cloak.realm}/users
     client_id: microservice-administration
     client_secret: eadbdaae-35f2-4ec7-90a5-1f74e7935fa9 
+  entities:
+    default:
+      user: 
+        password: admin
+  constants:
+    DEFAULT_MAX_TRANSACTIONS: 10
+    SIZE: 10
 springdoc:
   api-docs:
     path: /api-docs
