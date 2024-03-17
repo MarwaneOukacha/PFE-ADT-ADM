@@ -4,14 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import java.util.UUID;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EditUserRequestDTO {
+public class EditUserProfileRequestDTO {
 
     private String prenom;
 
@@ -20,13 +16,5 @@ public class EditUserRequestDTO {
     private String numTele;
 
     private String email;
-    private String oldEmail;
 
-    private String statut;
-
-    private String password ;
-
-    private int nbrMaxTransactions;
-
-    private int sizeMax;
 }

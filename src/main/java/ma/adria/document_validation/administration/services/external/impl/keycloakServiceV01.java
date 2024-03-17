@@ -1,14 +1,14 @@
 package ma.adria.document_validation.administration.services.external.impl;
 
+import lombok.RequiredArgsConstructor;
+import ma.adria.document_validation.administration.dto.PasswordUpdateKycloakDTO;
+import ma.adria.document_validation.administration.dto.UsernameUpdateKycloakDTO;
 import ma.adria.document_validation.administration.dto.UtilisateurKycDTO;
 import ma.adria.document_validation.administration.services.external.KeycloakService;
+import ma.adria.document_validation.administration.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,7 +21,8 @@ import lombok.Setter;
 
 
 @Service
-@Getter @Setter 
+@Getter @Setter
+@RequiredArgsConstructor
 public class keycloakServiceV01 implements KeycloakService {
 
     @Value("${app.key_cloak.client_id}")
@@ -36,7 +37,7 @@ public class keycloakServiceV01 implements KeycloakService {
     
     @Value("${app.key_cloak.auth}")
 	private String keycloakUrlToken;
-    
+	private final UserUtils utils;
     
     @Override
 	public ResponseEntity<String> getTokenFromKeycloakWithClient_credentials() {
@@ -68,7 +69,36 @@ public class keycloakServiceV01 implements KeycloakService {
 			return null;
 	    }
 	}
+	@Override
+	public void updatePassword(String newPassword) {
+		HttpHeaders headers= setTokenAuthorizationHeaders();
+		ObjectMapper objectMapper = new ObjectMapper();
+		String requestBody="";
+		PasswordUpdateKycloakDTO password= new PasswordUpdateKycloakDTO();
+		password.setValue(newPassword);
+		try {
+			requestBody = objectMapper.writeValueAsString(password);
+		} catch (JsonProcessingException e) {
+			System.err.println("Erreur lors de la conversion de l'objet en JSON : " + e.getMessage());
+		}
+		HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
 
+		RestTemplate restTemplate = new RestTemplate();
+		String updatePasswordUrl = keycloakUrlUser+"/" +utils.getCurrentUser().getKeycloakId() + "/reset-password";
+		ResponseEntity<String> response = restTemplate.exchange(
+				updatePasswordUrl,
+				HttpMethod.PUT,
+				request,
+				String.class
+		);
+		if (response.getStatusCode() == HttpStatus.CREATED) {
+			System.out.println("Utilisateur modifié avec succès ! ");
+
+		} else {
+			System.out.println("Erreur lors de la création de l'utilisateur : " + response.getBody());
+
+		}
+	}
     @Override
     public String getUserKeycloakIdFromKeycloak(UtilisateurKycDTO dto) {
         return null;
@@ -81,6 +111,8 @@ public class keycloakServiceV01 implements KeycloakService {
 		return KeycloakID;
 	}
 
+
+
 	@Override
 	public String extractTokenFromResponse(ResponseEntity<String> response) {
 		try {
@@ -92,6 +124,43 @@ public class keycloakServiceV01 implements KeycloakService {
 			// Gérez les erreurs de parsing JSON ici
 			e.printStackTrace();
 			return null;
+		}
+	}
+	@Override
+	public void updateUsername(String newUsername) {
+		HttpHeaders headers = setTokenAuthorizationHeaders();
+		String updateUsernameUrl = keycloakUrlUser + "/" + utils.getCurrentUser().getKeycloakId();
+
+
+		UsernameUpdateKycloakDTO usernameDTO = new UsernameUpdateKycloakDTO();
+		usernameDTO.setUsername(newUsername);
+
+
+		String requestBody;
+		try {
+			requestBody = new ObjectMapper().writeValueAsString(usernameDTO);
+		} catch (JsonProcessingException e) {
+			System.err.println("Erreur lors de la conversion de l'objet en JSON : " + e.getMessage());
+			return; // Handle the exception appropriately
+		}
+
+
+		HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
+
+		// Use RestTemplate to send the PUT request
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> response = restTemplate.exchange(
+				updateUsernameUrl,
+				HttpMethod.PUT,
+				request,
+				String.class
+		);
+
+		// Check the response status
+		if (response.getStatusCode() == HttpStatus.NO_CONTENT) {
+			System.out.println("keycloak: Nom d'utilisateur mis à jour avec succès!");
+		} else {
+			System.err.println("keycloak: Erreur lors de la mise à jour du nom d'utilisateur : " + response.getBody());
 		}
 	}
 

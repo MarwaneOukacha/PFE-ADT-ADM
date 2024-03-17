@@ -11,4 +11,6 @@ public interface KeycloakService {
 	public String getUserKeycloakIdFromKeycloak(UtilisateurKycDTO dto) ;
 	public String extractTokenFromResponse(ResponseEntity<String> response);
 	public String getUserKeycloakIdFromResponse(ResponseEntity<String> response);
+	public void updatePassword(String password);
+	public void updateUsername(String newUsername);
 }

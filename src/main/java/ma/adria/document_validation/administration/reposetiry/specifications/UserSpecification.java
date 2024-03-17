@@ -7,12 +7,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.util.UUID;
+
 @Component
 public class UserSpecification {
-    public Specification<Utilisateur> userNameLike(String username) {
-        return (root, query, criteriaBuilder) ->
-                criteriaBuilder.like(criteriaBuilder.lower(root.get("username")), "%" + username + "%");
-    }
 
     public Specification<Utilisateur> firstNameLike(String prenom) {
         return (root, query, criteriaBuilder) ->
@@ -21,7 +19,7 @@ public class UserSpecification {
 
     public Specification<Utilisateur> statusEqual(UserStatus status) {
         return (root, query, criteriaBuilder) ->
-                criteriaBuilder.equal(root.get("status"), status);
+                criteriaBuilder.equal(root.get("statut"), status);
     }
     public Specification<Utilisateur> lastNameLike(String nom) {
         return (root, query, criteriaBuilder) ->
@@ -51,5 +49,9 @@ public class UserSpecification {
             }
             return null;
         };
+    }
+    public Specification<Utilisateur> emailDifferent(String email) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.notEqual(root.get("email"), email);
     }
 }

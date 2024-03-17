@@ -15,4 +15,5 @@ public class UserPageRequestDTO extends PageableDTO {
     private String nom;
     private String email;
     private String statut;
+    private String numTele;
 }

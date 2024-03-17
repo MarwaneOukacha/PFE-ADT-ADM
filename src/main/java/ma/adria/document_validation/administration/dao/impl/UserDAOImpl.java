@@ -61,7 +61,7 @@ public class UserDAOImpl implements IUserDAO {
 	@Override
 	public Page<Utilisateur> getPage(Specification<Utilisateur> userSpecification, Pageable pageable) {
 		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findAll(userSpecification, pageable);
 	}
 
 	@Override
