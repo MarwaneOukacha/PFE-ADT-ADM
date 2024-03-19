@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:2022/ADT-Validation-documents
+    username: postgres
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+app:
+  key_cloak:
+    baseUrl: http://localhost:8008
+    client_id: microservice-administration
+    client_secret: c4a769af-0b53-46e5-a787-71f4f4494eb0

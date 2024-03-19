@@ -13,11 +13,12 @@ import java.util.UUID;
 
 @Repository
 public interface UserRepository extends JpaRepository<Utilisateur, UUID> , JpaSpecificationExecutor<Utilisateur> {
+
 	boolean existsByEmail(String email);
+
 	Utilisateur findByEmail(String email);
-	List<Utilisateur> findByNom(String nom);
-	List<Utilisateur> findByPrenom(String prenom);
-	List<Utilisateur> findByStatut(String statut);
+
 	Utilisateur findByKeycloakId(String keycloakId);
-	long countByStatut(String statut);
+
+	boolean existsByIdNotNull();
 }

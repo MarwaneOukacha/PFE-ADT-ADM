@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import ma.adria.document_validation.administration.model.enums.UserProfile;
 import ma.adria.document_validation.administration.model.enums.UserStatus;
 
-import javax.persistence.Enumerated;
 import java.sql.Date;
 import java.util.UUID;
 
@@ -16,7 +15,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder(toBuilder = true)
 public class CreateUserResponseDTO {
-    private UUID ID;
+
+    private UUID id;
     private String prenom;
     private String nom;
     private String numTele;

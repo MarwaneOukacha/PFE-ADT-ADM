@@ -3,8 +3,6 @@ package ma.adria.document_validation.administration.dto.request;
 import lombok.*;
 import ma.adria.document_validation.administration.dto.PageableDTO;
 
-import javax.persistence.Column;
-
 @Getter
 @Setter
 @NoArgsConstructor

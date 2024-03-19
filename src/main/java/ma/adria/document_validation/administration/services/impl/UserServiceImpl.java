@@ -1,17 +1,11 @@
 package ma.adria.document_validation.administration.services.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import ma.adria.document_validation.administration.dao.IADTConstDAO;
 import ma.adria.document_validation.administration.dao.IUserDAO;
-import ma.adria.document_validation.administration.dto.CredentialDTO;
-import ma.adria.document_validation.administration.dto.request.ResetPasswordRequestDTO;
+import ma.adria.document_validation.administration.dto.KeycloakUserDTO;
 import ma.adria.document_validation.administration.dto.UtilisateurDTO;
-import ma.adria.document_validation.administration.dto.UtilisateurKycDTO;
-import ma.adria.document_validation.administration.dto.request.CreateUserRequestDTO;
-import ma.adria.document_validation.administration.dto.request.EditUserProfileRequestDTO;
-import ma.adria.document_validation.administration.dto.request.EditUserRequestDTO;
-import ma.adria.document_validation.administration.dto.request.UserPageRequestDTO;
+import ma.adria.document_validation.administration.dto.request.*;
 import ma.adria.document_validation.administration.dto.response.CreateUserResponseDTO;
 import ma.adria.document_validation.administration.dto.response.EditUserProfileResponseDTO;
 import ma.adria.document_validation.administration.dto.response.EditUserResponseDTO;
@@ -37,73 +31,80 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    private final KeycloakService kycservice;
+
+    private final KeycloakService keycloakService;
+
     private final UtilisateurMapper utilisateurMapper;
+
     private final IUserDAO userDAO;
+
     private final PasswordEncoder passwordencoder;
+
     private final IADTConstDAO iADTConstDAO;
+
     private final UserSpecification userSpecification;
+
     private final UserUtils utils;
+
     @Override
     @Transactional(rollbackOn = Exception.class)
-    public ResponseEntity<CreateUserResponseDTO> createUtilisateur(CreateUserRequestDTO utilisateur) throws JsonProcessingException {
-        if (userDAO.existsByUserName(utilisateur.getEmail()) == false) {
-            Utilisateur user = Utilisateur.builder()
-                    .email(utilisateur.getEmail())
-                    .profil(UserProfile.USER)
-                    .statut(UserStatus.DISABLED)
-                    .nom(utilisateur.getNom())
-                    .prenom(utilisateur.getPrenom()).numTele(utilisateur.getNumTele())
-                    .nbrMaxTransactions(Integer.parseInt(iADTConstDAO.findADTConstByCode(ADTConstCode.MAX_NUMBRE_TRANSACTION).getValue())).sizeMax(Integer.parseInt(iADTConstDAO.findADTConstByCode(ADTConstCode.MAX_SIZE).getValue())).password(passwordencoder.encode(utilisateur.getPassword())).build();
-            userDAO.save(user);
-            UtilisateurKycDTO kdto=utilisateurMapper.toUtilisateurKycDTO(user);
-            kdto= kdto.toBuilder().enabled(true).enabled(true).credentials(Arrays.asList(CredentialDTO
-                    .builder().type("password").value(utilisateur.getPassword()).temporary(false).build())).build();
-            String kycID=kycservice.addUserToKeycloak(kdto);
-            user=user.toBuilder().keycloakId(kycID).build();
-            Utilisateur u= userDAO.save(user);
-            CreateUserResponseDTO res= utilisateurMapper.toCreateUtilisateurResponseDTO(utilisateur);
-            res=res.toBuilder()
-                    .ID(u.getId())
-                    .statut(u.getStatut())
-                    .profil(u.getProfil())
-                    .nbrMaxTransactions(user.getNbrMaxTransactions())
-                    .sizeMax(user.getSizeMax())
-                    .build();
-            return new ResponseEntity<>(res, HttpStatus.CREATED);
-        }else {
+    public ResponseEntity<CreateUserResponseDTO> createUtilisateur(CreateUserRequestDTO userRequestDTO) {
+
+        if (userDAO.existsByUserName(userRequestDTO.getEmail())) {
             throw new ResourceAlreadyExistsException("this user is already exist");
         }
 
-    }
+        Utilisateur user = Utilisateur.builder()
+                .email(userRequestDTO.getEmail())
+                .profil(UserProfile.USER)
+                .statut(UserStatus.DISABLED)
+                .nom(userRequestDTO.getNom())
+                .prenom(userRequestDTO.getPrenom())
+                .numTele(userRequestDTO.getNumTele())
+                .nbrMaxTransactions(Integer.parseInt(iADTConstDAO.findADTConstByCode(ADTConstCode.TRANSACTION_LIMIT_PER_DAY).getValue()))
+                .sizeMax(Integer.parseInt(iADTConstDAO.findADTConstByCode(ADTConstCode.DOCUMENT_MAX_SIZE_MB).getValue()))
+                .password(passwordencoder.encode(userRequestDTO.getPassword())).build();
 
+        user = userDAO.save(user);
+
+        KeycloakUserDTO keycloakUserDTO = utilisateurMapper.toKeycloakUserDTO(user, userRequestDTO.getPassword());
+
+        String keycloakId = keycloakService.addUserToKeycloak(keycloakUserDTO);
+
+        user.setKeycloakId(keycloakId);
+
+        user = userDAO.save(user);
+
+        CreateUserResponseDTO responseDTO = utilisateurMapper.toCreateUtilisateurResponseDTO(user);
+
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+
+
+    }
 
 
     @Override
     public Page<UserPageResponseDTO> getPage(UserPageRequestDTO userPageRequestDTO) {
 
-        Specification<Utilisateur> userSpec = getUserSpecification(userPageRequestDTO,utils.getCurrentUser().getEmail());
+        Specification<Utilisateur> userSpec = getUserSpecification(userPageRequestDTO, utils.getCurrentUser().getEmail());
         List<Sort.Order> orders = SortUtils.getOrders(userPageRequestDTO.getSort());
 
         Pageable pageable = PageRequest.of(userPageRequestDTO.getPage(), userPageRequestDTO.getSize(), Sort.by(orders));
 
         Page<Utilisateur> usersPage = userDAO.getPage(userSpec, pageable);
         return usersPage.map(
-            //TODO:il faut verifier le cas ou tous les chmanps sont vide
+                //TODO:il faut verifier le cas ou tous les chmanps sont vide
                 utilisateurMapper::mapUserToUserSearchResponseDTO
 
         );
@@ -159,15 +160,16 @@ public class UserServiceImpl implements UserService {
         Utilisateur user = userDAO.findById(connectedUser.getId());
 
         user.setPassword(passwordencoder.encode(request.getNewPassword()));
-        kycservice.updatePassword(request.getNewPassword());
+        keycloakService.updatePassword(request.getNewPassword());
         userDAO.save(user);
     }
 
     @Override
-    public UtilisateurDTO getUserById(String id) {
-        Utilisateur user= userDAO.findByKeycloakUserId(id);
-        UtilisateurDTO dto=utilisateurMapper.toUtilisateurDTO(user);
-        return dto;
+    public UtilisateurDTO getUserById(UUID id) {
+
+        Utilisateur user = userDAO.findById(id);
+
+        return utilisateurMapper.toUtilisateurDTO(user);
     }
 
     @Override
@@ -182,14 +184,15 @@ public class UserServiceImpl implements UserService {
             utilisateur.setEmail(user.getEmail());
         }
 
-        if (user.getPrenom() != null && !user.getPrenom().isEmpty()) {
+        if (StringUtils.hasText(user.getPrenom())) {
             utilisateur.setPrenom(user.getPrenom());
         }
 
-        if (user.getNom() != null && !user.getNom().isEmpty()) {
+        if (StringUtils.hasText(user.getNom())) {
             utilisateur.setNom(user.getNom());
         }
 
+        //TODO: password not crypted
         if (user.getPassword() != null && !user.getPassword().isEmpty()) {
             utilisateur.setPassword(passwordencoder.encode(user.getPassword()));
         }
@@ -206,9 +209,9 @@ public class UserServiceImpl implements UserService {
             utilisateur.setStatut(UserStatus.valueOf(user.getStatut()));
         }
 
-        Utilisateur updateUser= userDAO.save(utilisateur);
-        if(updateUser!=null){
-            kycservice.updateUsername(user.getEmail());
+        Utilisateur updateUser = userDAO.save(utilisateur);
+        if (updateUser != null) {
+            keycloakService.updateUsername(user.getEmail());
         }
 
 
@@ -216,12 +219,12 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     private Specification<Utilisateur> getUserSpecification(UserPageRequestDTO request, String connectedUserEmail) {
 
         Specification<Utilisateur> spec = (root, query, criteriaBuilder) ->
                 criteriaBuilder.isNotNull(root.get("id"));
 
+        //TODO: ???
         spec = spec.and(userSpecification.emailDifferent(connectedUserEmail));
 
         if (request.getEmail() != null) {
