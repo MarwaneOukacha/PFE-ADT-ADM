@@ -5,11 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
-public class PasswordUpdateKycloakDTO {
-    private final String type = "password";
-    private final boolean temporary = false;
-    private String value;
+public class UsernameUpdateKeycloakDTO {
+    private String username;
 }

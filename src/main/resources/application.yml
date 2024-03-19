@@ -38,11 +38,14 @@ app:
     client_secret: eadbdaae-35f2-4ec7-90a5-1f74e7935fa9 
   entities:
     default:
-      user: 
+      admin:
+        email: admin@gmail.com
         password: admin
+        firstName: admin
+        lastName: admin
   constants:
-    DEFAULT_MAX_TRANSACTIONS: 10
-    SIZE: 10
+    transaction-limit-per-day: 10
+    document-max-size-MB: 10
 springdoc:
   api-docs:
     path: /api-docs

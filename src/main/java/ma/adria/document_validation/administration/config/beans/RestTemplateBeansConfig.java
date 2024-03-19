@@ -5,9 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class restTemplateBeans {
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+public class RestTemplateBeansConfig {
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 }

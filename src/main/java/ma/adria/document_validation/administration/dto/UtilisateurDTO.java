@@ -8,20 +8,31 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-@Getter @Setter
+@Getter
+@Setter
 public class UtilisateurDTO {
-	private String prenom;
-	private String nom;
-	private String numTele;
-	private String email;
-	private String profil;	
-	private String statut;
-	private Date emailValidatedAt;
-	private int nbrMaxTransactions;
-	private int sizeMax;
-	@CreatedDate
-	private LocalDateTime createdDate;
 
-	@LastModifiedDate
-	private LocalDateTime lastModifiedDate;
+    private String prenom;
+
+    private String nom;
+
+    private String numTele;
+
+    private String email;
+
+    private String profil;
+
+    private String statut;
+
+    private Date emailValidatedAt;
+
+    private int nbrMaxTransactions;
+
+    private int sizeMax;
+
+    @CreatedDate
+    private LocalDateTime createdDate;
+
+    @LastModifiedDate
+    private LocalDateTime lastModifiedDate;
 }

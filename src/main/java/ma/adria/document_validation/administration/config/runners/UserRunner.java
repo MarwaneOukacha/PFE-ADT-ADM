@@ -1,67 +1,81 @@
 package ma.adria.document_validation.administration.config.runners;
 
+import lombok.RequiredArgsConstructor;
 import ma.adria.document_validation.administration.dao.IUserDAO;
-import ma.adria.document_validation.administration.dto.CredentialDTO;
-import ma.adria.document_validation.administration.dto.UtilisateurKycDTO;
+import ma.adria.document_validation.administration.dto.KeycloakUserDTO;
 import ma.adria.document_validation.administration.mapper.UtilisateurMapper;
 import ma.adria.document_validation.administration.model.entities.Utilisateur;
 import ma.adria.document_validation.administration.model.enums.UserProfile;
 import ma.adria.document_validation.administration.model.enums.UserStatus;
-import org.springframework.beans.factory.annotation.Autowired;
+import ma.adria.document_validation.administration.services.external.KeycloakService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import ma.adria.document_validation.administration.services.external.KeycloakService;
-
-import java.util.Arrays;
+import javax.transaction.Transactional;
 
 
 @Configuration
-public class UserRunner {
-	@Autowired
-	private PasswordEncoder passwordencoder;
-	@Autowired
-	private KeycloakService kyckService;
-	@Value("${app.entities.default.user.password}")
-    private String defaultUserPassword ;
-	@Autowired
-    private UtilisateurMapper utilisateurMapper;
-	
-	@Bean
-	//@Transactional(rollbackOn = Exception.class)
-	public CommandLineRunner commandLineRunner(IUserDAO userDao) {
+@Transactional
+@RequiredArgsConstructor
+public class UserRunner implements CommandLineRunner {
 
-		return args -> {
-			try {
-				if (userDao.existsByUserName("admin@gmail.com") == false) {
-					
-					Utilisateur user = Utilisateur.builder()
-							.email("admin@gmail.com")
-							.profil(UserProfile.ADMIN)
-							.statut(UserStatus.ENABELED)
-							.nom("admin")
-							.prenom("admin").numTele("#########") // Vous pouvez ajouter le numéro
-																						// de téléphone ici
-							.nbrMaxTransactions(0).sizeMax(0).password(passwordencoder.encode("admin")).build();
-					userDao.save(user);
-					UtilisateurKycDTO kycUser=utilisateurMapper.toUtilisateurKycDTO(user);
+    private final IUserDAO userDAO;
 
-					kycUser=kycUser.toBuilder().enabled(true).credentials(Arrays.asList(CredentialDTO
-									.builder().type("password").value(defaultUserPassword).temporary(false).build()))
-							.build();
-					String keyId=kyckService.addUserToKeycloak(kycUser);
-					user=user.toBuilder().keycloakId(keyId).build();
-					userDao.save(user);
+    private final PasswordEncoder passwordencoder;
 
-				}
-			} catch (Exception e) {
-				e.getMessage();
-			}
+    private final KeycloakService keycloakService;
 
-		};
-	}
+    private final UtilisateurMapper utilisateurMapper;
 
+    @Value("${app.entities.default.admin.password}")
+    private String defaultUserPassword;
+
+    @Value("${app.entities.default.admin.email}")
+    private String defaultAdminEmail;
+
+    @Value("${app.entities.default.admin.firstName}")
+    private String defaultAdminFirstName;
+
+    @Value("${app.entities.default.admin.lastName}")
+    private String defaultAdminLastName;
+
+    @Value("${app.entities.default.admin.phoneNumber}")
+    private String defaultAdminPhoneNumber;
+
+
+    private void createDefaultAdmin() {
+
+        Utilisateur user = Utilisateur.builder()
+                .email(defaultAdminEmail)
+                .profil(UserProfile.ADMIN)
+                .statut(UserStatus.ENABELED)
+                .nom(defaultAdminLastName)
+                .prenom(defaultAdminFirstName)
+                .numTele(defaultAdminPhoneNumber)
+                .nbrMaxTransactions(0)
+                .sizeMax(0)
+                .password(passwordencoder.encode(defaultUserPassword))
+                .build();
+
+        userDAO.save(user);
+
+        KeycloakUserDTO keycloakUser = utilisateurMapper.toKeycloakUserDTO(user, defaultUserPassword);
+
+
+        String keycloakId = keycloakService.addUserToKeycloak(keycloakUser);
+
+        user.setKeycloakId(keycloakId);
+
+        userDAO.save(user);
+
+    }
+
+    @Override
+    public void run(String... args) {
+
+        if (!userDAO.exists()) createDefaultAdmin();
+
+    }
 }

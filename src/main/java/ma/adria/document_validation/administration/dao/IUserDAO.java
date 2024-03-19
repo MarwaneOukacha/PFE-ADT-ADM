@@ -13,7 +13,7 @@ import ma.adria.document_validation.administration.model.enums.UserStatus;
 
 
 public interface IUserDAO {
-	List<Utilisateur> findAll();
+
     Utilisateur save(Utilisateur user);
 
     Utilisateur findByUserName(String username);
@@ -26,7 +26,5 @@ public interface IUserDAO {
 
     Utilisateur findByKeycloakUserId(String string);
 
-    long count();
-
-    long countByStatus(UserStatus userStatus);
+    boolean exists();
 }
