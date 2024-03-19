@@ -4,13 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import ma.adria.document_validation.administration.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import ma.adria.document_validation.administration.exception.KycException;
-import ma.adria.document_validation.administration.exception.UserException;
 
 @RestControllerAdvice
 public class globalExceptionHandler {
@@ -35,5 +33,26 @@ public class globalExceptionHandler {
 		Map<String,String> errorMap=new HashMap<>();
 		errorMap.put("error", "Invalid email");
 		return errorMap;
+    }
+    @ExceptionHandler(GenericException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleGenericException(GenericException ex) {
+        Map<String,String> errorMap=new HashMap<>();
+        errorMap.put("error", ex.getMessage());
+        return errorMap;
+    }
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleResourceAlreadyExistsException(ResourceAlreadyExistsException ex) {
+        Map<String,String> errorMap=new HashMap<>();
+        errorMap.put("error", ex.getMessage());
+        return errorMap;
+    }
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleResourceNotFoundException(ResourceNotFoundException ex) {
+        Map<String,String> errorMap=new HashMap<>();
+        errorMap.put("error", ex.getMessage());
+        return errorMap;
     }
 }

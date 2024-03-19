@@ -41,6 +41,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;
@@ -164,7 +165,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UtilisateurDTO getUserById(String id) {
-        Utilisateur user= userDAO.findById(UUID.fromString(id));
+        Utilisateur user= userDAO.findByKeycloakUserId(id);
         UtilisateurDTO dto=utilisateurMapper.toUtilisateurDTO(user);
         return dto;
     }
@@ -177,7 +178,7 @@ public class UserServiceImpl implements UserService {
             throw new ResourceNotFoundException(ErrorCode.ACCOUNT_USER_NOT_FOUND_ID);
         }
 
-        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+        if (StringUtils.hasText(user.getEmail())) {
             utilisateur.setEmail(user.getEmail());
         }
 
@@ -190,7 +191,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (user.getPassword() != null && !user.getPassword().isEmpty()) {
-            utilisateur.setPassword(user.getPassword());
+            utilisateur.setPassword(passwordencoder.encode(user.getPassword()));
         }
 
         if (user.getSizeMax() != 0) {

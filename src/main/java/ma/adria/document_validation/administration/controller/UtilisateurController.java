@@ -53,12 +53,12 @@ public class UtilisateurController {
     }
     @PutMapping("/edit")
     public ResponseEntity<EditUserResponseDTO> edit(@RequestBody @Valid EditUserRequestDTO user) {
-        return ResponseEntity.ok()
+        return ResponseEntity.ok() //userid
                 .body(userservice.editUser(user));
     }
     @PutMapping(value = "/profile/edit")
     public ResponseEntity<EditUserProfileResponseDTO> editProfile(@RequestBody @Valid EditUserProfileRequestDTO user) {
-        return ResponseEntity.ok()
+        return ResponseEntity.ok() //KeycloakID
                 .body(userservice.editProfile(user));
     }
 
