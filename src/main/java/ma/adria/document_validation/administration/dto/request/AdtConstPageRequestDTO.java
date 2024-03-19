@@ -4,15 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class CreateADTConstRequestDTO {
+public class AdtConstPageRequestDTO extends PageableDTO {
 
     private String code;
 
     private String value;
 
-    private boolean encrypted;
+    private Boolean encrypted;
 
 }
+

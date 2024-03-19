@@ -23,7 +23,7 @@ public interface UserService {
 	Page<UserPageResponseDTO> getPage(UserPageRequestDTO userPageRequestDTO);
 	EditUserProfileResponseDTO editProfile(EditUserProfileRequestDTO user);
 	void resetPassword(ResetPasswordRequestDTO request);
-	UtilisateurDTO getUserById(UUID id);
+	UtilisateurDTO getUserById(String id);
 
     EditUserResponseDTO editUser(EditUserRequestDTO user);
 }

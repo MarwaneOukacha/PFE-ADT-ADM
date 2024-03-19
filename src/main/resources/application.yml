@@ -43,6 +43,7 @@ app:
         password: admin
         firstName: admin
         lastName: admin
+        phoneNumber: 06********
   constants:
     transaction-limit-per-day: 10
     document-max-size-MB: 10

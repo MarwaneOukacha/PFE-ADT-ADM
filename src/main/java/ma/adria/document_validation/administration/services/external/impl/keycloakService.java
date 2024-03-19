@@ -69,8 +69,7 @@ public class keycloakService implements KeycloakService {
             requestBody = objectMapper.writeValueAsString(dto);
 
         } catch (JsonProcessingException e) {
-
-            System.err.println("Erreur lors de la conversion de l'objet en JSON : " + e.getMessage());
+            log.error("Erreur lors de la conversion de l'objet en JSON :"  + e.getMessage());
 
         }
 
@@ -85,9 +84,7 @@ public class keycloakService implements KeycloakService {
             return getUserKeycloakIdFromResponse(response);
 
         } else {
-
-            System.out.println("Erreur lors de la création de l'utilisateur : " + response.getBody());
-
+            log.error("Erreur lors de la création de l'utilisateur : " + response.getBody());
             return null;
         }
     }
@@ -102,7 +99,7 @@ public class keycloakService implements KeycloakService {
         try {
             requestBody = objectMapper.writeValueAsString(password);
         } catch (JsonProcessingException e) {
-            System.err.println("Erreur lors de la conversion de l'objet en JSON : " + e.getMessage());
+            log.error("Erreur lors de la conversion de l'objet en JSON : " + e.getMessage());
         }
         HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
 
@@ -115,11 +112,9 @@ public class keycloakService implements KeycloakService {
                 String.class
         );
         if (response.getStatusCode() == HttpStatus.CREATED) {
-            System.out.println("Utilisateur modifié avec succès ! ");
-
+            log.info("Utilisateur modifié avec succès ! ");
         } else {
-            System.out.println("Erreur lors de la création de l'utilisateur : " + response.getBody());
-
+            log.error("Erreur lors de la création de l'utilisateur : " + response.getBody());
         }
     }
 

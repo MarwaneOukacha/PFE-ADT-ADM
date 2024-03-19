@@ -27,7 +27,10 @@ public class ADTConst extends AbstractEntity {
     @Column(nullable = false)
     private String value;
 
-
+    @Column(nullable = false)
+    @ColumnDefault("'0'")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean encrypted;
 
     @Override
     public boolean equals(Object o) {

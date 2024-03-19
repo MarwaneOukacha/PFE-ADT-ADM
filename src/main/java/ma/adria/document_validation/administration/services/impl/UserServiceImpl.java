@@ -33,6 +33,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -113,22 +114,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public EditUserProfileResponseDTO editProfile(EditUserProfileRequestDTO user) {
 
-        Utilisateur utilisateur = userDAO.findByUserName(user.getEmail());
+        Utilisateur utilisateur = userDAO.findById(UUID.fromString(user.getId()));
 
         if (utilisateur == null) {
             throw new ResourceNotFoundException(ErrorCode.ACCOUNT_USER_NOT_FOUND_ID);
         }
 
-        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+        if (StringUtils.hasText(user.getEmail())) {
             utilisateur.setEmail(user.getEmail());
         }
 
-        if (user.getPrenom() != null && !user.getPrenom().isEmpty()) {
+        if (StringUtils.hasText(user.getPrenom())) {
             utilisateur.setPrenom(user.getPrenom());
         }
 
-        if (user.getNom() != null && !user.getNom().isEmpty()) {
+        if (StringUtils.hasText(user.getNom())) {
             utilisateur.setNom(user.getNom());
+        }
+        if (StringUtils.hasText(user.getNumTele())) {
+            utilisateur.setNom(user.getNumTele());
         }
         userDAO.save(utilisateur);
         return utilisateurMapper.toEditUtilisateurProfileResponseDTO(utilisateur);
@@ -165,16 +169,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UtilisateurDTO getUserById(UUID id) {
+    public UtilisateurDTO getUserById(String id) {
 
-        Utilisateur user = userDAO.findById(id);
+        Utilisateur user = userDAO.findById(UUID.fromString(id));
 
         return utilisateurMapper.toUtilisateurDTO(user);
     }
 
     @Override
     public EditUserResponseDTO editUser(EditUserRequestDTO user) {
-        Utilisateur utilisateur = userDAO.findByUserName(user.getOldEmail());
+        Utilisateur utilisateur = userDAO.findById(UUID.fromString(user.getId()));
 
         if (utilisateur == null) {
             throw new ResourceNotFoundException(ErrorCode.ACCOUNT_USER_NOT_FOUND_ID);
@@ -192,8 +196,8 @@ public class UserServiceImpl implements UserService {
             utilisateur.setNom(user.getNom());
         }
 
-        //TODO: password not crypted
-        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+
+        if (StringUtils.hasText(user.getPassword())) {
             utilisateur.setPassword(passwordencoder.encode(user.getPassword()));
         }
 
@@ -223,8 +227,6 @@ public class UserServiceImpl implements UserService {
 
         Specification<Utilisateur> spec = (root, query, criteriaBuilder) ->
                 criteriaBuilder.isNotNull(root.get("id"));
-
-        //TODO: ???
         spec = spec.and(userSpecification.emailDifferent(connectedUserEmail));
 
         if (request.getEmail() != null) {
