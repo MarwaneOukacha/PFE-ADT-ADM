@@ -108,7 +108,6 @@ public class ClientApplicationServiceImpl implements IClientService {
         Page<ClientApplication> clientsPage = clientDAO.getPage(pageable, clientSpec);
         return clientsPage.map(
                 clientMapper::mapClientToSearchClientResponseDTO
-                //TODO:vous avez un probleme dans le mapping
         );
     }
 
