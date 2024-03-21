@@ -3,13 +3,13 @@ package ma.adria.document_validation.administration.services.impl;
 import lombok.RequiredArgsConstructor;
 import ma.adria.document_validation.administration.dao.IADTConstDAO;
 import ma.adria.document_validation.administration.dao.IUserDAO;
-import ma.adria.document_validation.administration.dto.KeycloakUserDTO;
+import ma.adria.document_validation.administration.dto.keycloak.KeycloakUserDTO;
 import ma.adria.document_validation.administration.dto.UtilisateurDTO;
-import ma.adria.document_validation.administration.dto.request.*;
-import ma.adria.document_validation.administration.dto.response.CreateUserResponseDTO;
-import ma.adria.document_validation.administration.dto.response.EditUserProfileResponseDTO;
-import ma.adria.document_validation.administration.dto.response.EditUserResponseDTO;
-import ma.adria.document_validation.administration.dto.response.UserPageResponseDTO;
+import ma.adria.document_validation.administration.dto.request.user.*;
+import ma.adria.document_validation.administration.dto.response.user.CreateUserResponseDTO;
+import ma.adria.document_validation.administration.dto.response.user.EditUserProfileResponseDTO;
+import ma.adria.document_validation.administration.dto.response.user.EditUserResponseDTO;
+import ma.adria.document_validation.administration.dto.response.user.UserPageResponseDTO;
 import ma.adria.document_validation.administration.exception.GenericException;
 import ma.adria.document_validation.administration.exception.ResourceAlreadyExistsException;
 import ma.adria.document_validation.administration.exception.ResourceNotFoundException;
@@ -220,6 +220,12 @@ public class UserServiceImpl implements UserService {
 
 
         return utilisateurMapper.toEditUtilisateurResponseDTO(utilisateur);
+    }
+
+    @Override
+    public UtilisateurDTO getCurrentUserDetails() {
+        Utilisateur currentUser= utils.getCurrentUser();
+        return utilisateurMapper.toUtilisateurDTO(currentUser);
     }
 
 

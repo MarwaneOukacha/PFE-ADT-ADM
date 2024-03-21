@@ -1,4 +1,4 @@
-package ma.adria.document_validation.administration.dto.response;
+package ma.adria.document_validation.administration.dto.response.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

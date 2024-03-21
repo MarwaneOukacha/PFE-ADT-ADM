@@ -39,7 +39,7 @@ public class globalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> handleInvalidEmailException(NoSuchElementException ex) {
         Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("error", "Invalid email");
+        errorMap.put("error", ex.getMessage());
         return errorMap;
     }
 

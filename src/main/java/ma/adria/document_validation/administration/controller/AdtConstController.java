@@ -3,12 +3,11 @@ package ma.adria.document_validation.administration.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import ma.adria.document_validation.administration.dto.request.CreateADTConstRequestDTO;
-import ma.adria.document_validation.administration.dto.request.EditADTConstRequestDTO;
-import ma.adria.document_validation.administration.dto.response.ADTConstResponseDTO;
+import ma.adria.document_validation.administration.dto.request.ADTConst.CreateADTConstRequestDTO;
+import ma.adria.document_validation.administration.dto.request.ADTConst.EditADTConstRequestDTO;
+import ma.adria.document_validation.administration.dto.response.ADTConst.ADTConstResponseDTO;
 import ma.adria.document_validation.administration.services.adtconstants.IADTConstService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,7 @@ import java.util.List;
 
 @Tag(name = "ADT-const controller")
 @RestController
-@RequestMapping("${app.api.endpoint.v1}/adt-const")
+@RequestMapping("/ADTConst")
 @RequiredArgsConstructor
 @Slf4j
 @Validated

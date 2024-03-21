@@ -7,9 +7,11 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import ma.adria.document_validation.administration.dto.KeycloakUserDTO;
-import ma.adria.document_validation.administration.dto.PasswordUpdateKeycloakDTO;
-import ma.adria.document_validation.administration.dto.UsernameUpdateKeycloakDTO;
+import ma.adria.document_validation.administration.dto.keycloak.*;
+import ma.adria.document_validation.administration.dto.request.clientApp.EditClientAppNameRequestDTO;
+import ma.adria.document_validation.administration.dto.response.clientApp.EditClientResponseDTO;
+import ma.adria.document_validation.administration.dto.response.keycloak.AddClientToKeycloakResponseDTO;
+import ma.adria.document_validation.administration.dto.response.keycloak.keycloakSecretResponseDTO;
 import ma.adria.document_validation.administration.services.external.KeycloakService;
 import ma.adria.document_validation.administration.util.UserUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +25,7 @@ import org.springframework.web.client.RestTemplate;
 @Setter
 @RequiredArgsConstructor
 @Slf4j
-public class keycloakService implements KeycloakService {
+public class keycloakServiceImpl implements KeycloakService {
 
     @Value("${app.key_cloak.client_id}")
     private String clientId;
@@ -38,6 +40,8 @@ public class keycloakService implements KeycloakService {
 
     @Value("${app.key_cloak.auth}")
     private String keycloakUrlToken;
+    @Value("${app.key_cloak.clients}")
+    private String keycloakUrlClients;
 
     private final UserUtils utils;
 
@@ -78,9 +82,7 @@ public class keycloakService implements KeycloakService {
         ResponseEntity<String> response = restTemplate.postForEntity(keycloakUrlUser, request, String.class);
 
         if (response.getStatusCode() == HttpStatus.CREATED) {
-
-            System.out.println("Utilisateur créé avec succès ! ");
-
+            log.info("Utilisateur créé avec succès ! ");
             return getUserKeycloakIdFromResponse(response);
 
         } else {
@@ -175,6 +177,92 @@ public class keycloakService implements KeycloakService {
             System.out.println("keycloak: Nom d'utilisateur mis à jour avec succès!");
         } else {
             System.err.println("keycloak: Erreur lors de la mise à jour du nom d'utilisateur : " + response.getBody());
+        }
+    }
+
+    @Override
+    public void updateClientAppName(EditClientAppNameRequestDTO editClientRequestDTO,String id) {
+        HttpHeaders headers = setTokenAuthorizationHeaders();
+
+        HttpEntity<EditClientAppNameRequestDTO> request = new HttpEntity<>(editClientRequestDTO, headers);
+
+        String url = keycloakUrlClients+"/"+id;
+
+        ResponseEntity<EditClientResponseDTO> response = restTemplate.exchange(
+                url,
+                HttpMethod.PUT,
+                request,
+                EditClientResponseDTO.class
+        );
+
+        if (response.getStatusCode() == HttpStatus.NO_CONTENT) {
+            log.info("Client app name updated");
+        } else {
+            throw new RuntimeException("Failed to update client name: " + response.getStatusCode());
+        }
+    }
+    @Override
+    public AddClientToKeycloakResponseDTO addClientToKeycloak(KeycloakClientDTO clientDto) {
+        HttpHeaders headers = setTokenAuthorizationHeaders();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        String requestBody = "";
+
+        try {
+
+            requestBody = objectMapper.writeValueAsString(clientDto);
+
+        } catch (JsonProcessingException e) {
+            log.error("Erreur lors de la conversion de l'objet en JSON :"  + e.getMessage());
+
+        }
+
+        HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(keycloakUrlClients, request, String.class);
+
+        if (response.getStatusCode() == HttpStatus.CREATED) {
+            log.info("client créé avec succès!");
+            String keycloakID=getUserKeycloakIdFromResponse(response);
+            String secret= getClientSecret(keycloakID);
+            return AddClientToKeycloakResponseDTO.builder()
+                    .keycloakID(keycloakID)
+                    .secret(secret)
+                    .build();
+
+        } else {
+            log.error("Erreur lors de la création du client : " + response.getBody());
+            return null;
+        }
+    }
+
+    @Override
+    public void updateClientName(String newClientName) {
+
+    }
+
+    @Override
+    public String getClientSecret(String keycloakID) {
+        HttpHeaders headers = setTokenAuthorizationHeaders();
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        String requestBody = "{\n" +
+                "  \"value\": \"new_generated_secret\",\n" +
+                "  \"expiration\": 0,\n" +
+                "  \"generated\": true\n" +
+                "}";
+
+        HttpEntity<String> request = new HttpEntity<>(requestBody,headers);
+        System.out.println(keycloakUrlClients+"/"+keycloakID+"/client-secret");
+        ResponseEntity<keycloakSecretResponseDTO> response = restTemplate.postForEntity(keycloakUrlClients+"/"+keycloakID+"/client-secret", request, keycloakSecretResponseDTO.class);
+        //TODO:vous n'arriver pas à obtenir le secret
+        if (response.getStatusCode() == HttpStatus.OK) {
+            log.info("client secret créé avec succès!");
+            return response.getBody().getValue();
+        } else {
+            log.error("Erreur lors de la création du secret : " + response.getBody());
+            return null;
         }
     }
 

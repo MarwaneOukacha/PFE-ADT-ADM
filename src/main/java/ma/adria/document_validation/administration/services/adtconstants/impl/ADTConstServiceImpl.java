@@ -2,11 +2,11 @@ package ma.adria.document_validation.administration.services.adtconstants.impl;
 
 import lombok.RequiredArgsConstructor;
 import ma.adria.document_validation.administration.dao.IADTConstDAO;
-import ma.adria.document_validation.administration.dto.request.AdtConstPageRequestDTO;
-import ma.adria.document_validation.administration.dto.request.CreateADTConstRequestDTO;
-import ma.adria.document_validation.administration.dto.request.EditADTConstRequestDTO;
-import ma.adria.document_validation.administration.dto.response.ADTConstCodeResponseDTO;
-import ma.adria.document_validation.administration.dto.response.ADTConstResponseDTO;
+import ma.adria.document_validation.administration.dto.request.ADTConst.AdtConstPageRequestDTO;
+import ma.adria.document_validation.administration.dto.request.ADTConst.CreateADTConstRequestDTO;
+import ma.adria.document_validation.administration.dto.request.ADTConst.EditADTConstRequestDTO;
+import ma.adria.document_validation.administration.dto.response.ADTConst.ADTConstCodeResponseDTO;
+import ma.adria.document_validation.administration.dto.response.ADTConst.ADTConstResponseDTO;
 import ma.adria.document_validation.administration.mapper.ADTConstMapper;
 import ma.adria.document_validation.administration.model.entities.ADTConst;
 import ma.adria.document_validation.administration.reposetiry.specifications.AdtConstSpecification;

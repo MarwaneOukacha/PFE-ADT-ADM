@@ -1,4 +1,4 @@
-package ma.adria.document_validation.administration.dto.response;
+package ma.adria.document_validation.administration.dto.response.ADTConst;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

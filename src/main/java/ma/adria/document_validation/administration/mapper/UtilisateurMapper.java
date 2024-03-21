@@ -1,18 +1,17 @@
 package ma.adria.document_validation.administration.mapper;
 
-import ma.adria.document_validation.administration.dto.CredentialDTO;
+import ma.adria.document_validation.administration.dto.keycloak.CredentialDTO;
 import ma.adria.document_validation.administration.dto.UtilisateurDTO;
-import ma.adria.document_validation.administration.dto.request.CreateUserRequestDTO;
-import ma.adria.document_validation.administration.dto.response.CreateUserResponseDTO;
-import ma.adria.document_validation.administration.dto.response.EditUserProfileResponseDTO;
-import ma.adria.document_validation.administration.dto.response.EditUserResponseDTO;
-import ma.adria.document_validation.administration.dto.response.UserPageResponseDTO;
+import ma.adria.document_validation.administration.dto.request.user.CreateUserRequestDTO;
+import ma.adria.document_validation.administration.dto.response.user.CreateUserResponseDTO;
+import ma.adria.document_validation.administration.dto.response.user.EditUserProfileResponseDTO;
+import ma.adria.document_validation.administration.dto.response.user.EditUserResponseDTO;
+import ma.adria.document_validation.administration.dto.response.user.UserPageResponseDTO;
 import org.mapstruct.*;
 
-import ma.adria.document_validation.administration.dto.KeycloakUserDTO;
+import ma.adria.document_validation.administration.dto.keycloak.KeycloakUserDTO;
 import ma.adria.document_validation.administration.model.entities.Utilisateur;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 @Mapper(builder = @Builder(disableBuilder = true),

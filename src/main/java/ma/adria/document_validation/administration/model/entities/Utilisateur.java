@@ -32,7 +32,7 @@ public class Utilisateur extends AbstractEntity{
 	private String password;
 	@Column(nullable = true,unique = true)
 	private String keycloakId;
-	@Column(nullable = true)
+	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private UserStatus statut;
 	@Column(nullable = true)

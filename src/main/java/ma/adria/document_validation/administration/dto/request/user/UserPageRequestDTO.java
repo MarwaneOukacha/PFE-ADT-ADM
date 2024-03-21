@@ -1,4 +1,4 @@
-package ma.adria.document_validation.administration.dto.request;
+package ma.adria.document_validation.administration.dto.request.user;
 
 import lombok.*;
 import ma.adria.document_validation.administration.dto.PageableDTO;

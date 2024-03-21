@@ -2,7 +2,7 @@ package ma.adria.document_validation.administration.config.runners;
 
 import lombok.RequiredArgsConstructor;
 import ma.adria.document_validation.administration.dao.IUserDAO;
-import ma.adria.document_validation.administration.dto.KeycloakUserDTO;
+import ma.adria.document_validation.administration.dto.keycloak.KeycloakUserDTO;
 import ma.adria.document_validation.administration.mapper.UtilisateurMapper;
 import ma.adria.document_validation.administration.model.entities.Utilisateur;
 import ma.adria.document_validation.administration.model.enums.UserProfile;

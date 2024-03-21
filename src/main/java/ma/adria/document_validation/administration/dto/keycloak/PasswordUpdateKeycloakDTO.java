@@ -1,4 +1,4 @@
-package ma.adria.document_validation.administration.dto;
+package ma.adria.document_validation.administration.dto.keycloak;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -2,18 +2,17 @@ package ma.adria.document_validation.administration.controller;
 
 import lombok.RequiredArgsConstructor;
 import ma.adria.document_validation.administration.dto.UtilisateurDTO;
-import ma.adria.document_validation.administration.dto.request.*;
-import ma.adria.document_validation.administration.dto.response.CreateUserResponseDTO;
-import ma.adria.document_validation.administration.dto.response.EditUserProfileResponseDTO;
-import ma.adria.document_validation.administration.dto.response.EditUserResponseDTO;
-import ma.adria.document_validation.administration.dto.response.UserPageResponseDTO;
+import ma.adria.document_validation.administration.dto.request.user.*;
+import ma.adria.document_validation.administration.dto.response.user.CreateUserResponseDTO;
+import ma.adria.document_validation.administration.dto.response.user.EditUserProfileResponseDTO;
+import ma.adria.document_validation.administration.dto.response.user.EditUserResponseDTO;
+import ma.adria.document_validation.administration.dto.response.user.UserPageResponseDTO;
 import ma.adria.document_validation.administration.services.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -53,6 +52,10 @@ public class UserController {
     public ResponseEntity<Void> resetPassword(@RequestBody @Valid ResetPasswordRequestDTO request) {
         userservice.resetPassword(request);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("/details")
+    public ResponseEntity<UtilisateurDTO> getCurrentUserDetails() {
+        return ResponseEntity.ok().body(userservice.getCurrentUserDetails());
     }
 
 

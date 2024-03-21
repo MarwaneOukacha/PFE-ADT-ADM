@@ -1,9 +1,9 @@
 package ma.adria.document_validation.administration.mapper;
 
-import ma.adria.document_validation.administration.dto.request.CreateADTConstRequestDTO;
-import ma.adria.document_validation.administration.dto.request.EditADTConstRequestDTO;
-import ma.adria.document_validation.administration.dto.response.ADTConstCodeResponseDTO;
-import ma.adria.document_validation.administration.dto.response.ADTConstResponseDTO;
+import ma.adria.document_validation.administration.dto.request.ADTConst.CreateADTConstRequestDTO;
+import ma.adria.document_validation.administration.dto.request.ADTConst.EditADTConstRequestDTO;
+import ma.adria.document_validation.administration.dto.response.ADTConst.ADTConstCodeResponseDTO;
+import ma.adria.document_validation.administration.dto.response.ADTConst.ADTConstResponseDTO;
 import ma.adria.document_validation.administration.model.entities.ADTConst;
 import org.mapstruct.*;
 

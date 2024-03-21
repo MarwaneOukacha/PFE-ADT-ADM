@@ -22,7 +22,11 @@ public class ADTConstRunner implements CommandLineRunner {
 
     @Value("${app.constants.document-max-size-MB}")
     private String documentMaxSizeMB;
+    @Value("${app.constants.client-app-transaction-limit-per-day}")
+    private String ClientAppDailyTransactionLimit;
 
+    @Value("${app.constants.client-app-document-max-size-MB}")
+    private String ClientAppDocumentMaxSizeMB;
     public ADTConstRunner(IADTConstDAO adtConstDAO) {
         this.adtConstDAO = adtConstDAO;
     }
@@ -42,6 +46,20 @@ public class ADTConstRunner implements CommandLineRunner {
                             .code(ADTConstCode.DOCUMENT_MAX_SIZE_MB)
                             .value(documentMaxSizeMB)
                             .build()
+            );
+        }
+        if (!adtConstDAO.existsByCode(ADTConstCode.CLIENT_APP_TRANSACTION_LIMIT_PER_DAY)) {
+            adtConstDAO.save(ADTConst.builder()
+                    .code(ADTConstCode.CLIENT_APP_TRANSACTION_LIMIT_PER_DAY)
+                    .value(ClientAppDailyTransactionLimit)
+                    .build()
+            );
+        }
+        if (!adtConstDAO.existsByCode(ADTConstCode.CLIENT_APP_DOCUMENT_MAX_SIZE_MB)) {
+            adtConstDAO.save(ADTConst.builder()
+                    .code(ADTConstCode.CLIENT_APP_DOCUMENT_MAX_SIZE_MB)
+                    .value(ClientAppDocumentMaxSizeMB)
+                    .build()
             );
         }
     }

@@ -1,4 +1,4 @@
-package ma.adria.document_validation.administration.dto.request;
+package ma.adria.document_validation.administration.dto.request.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

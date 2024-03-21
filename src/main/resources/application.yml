@@ -34,8 +34,9 @@ app:
     baseUrl: http://localhost:8000
     auth: ${app.key_cloak.baseUrl}/auth/realms/${app.key_cloak.realm}/protocol/openid-connect/token
     users: ${app.key_cloak.baseUrl}/auth/admin/realms/${app.key_cloak.realm}/users
+    clients: ${app.key_cloak.baseUrl}/auth/admin/realms/${app.key_cloak.realm}/clients
     client_id: microservice-administration
-    client_secret: eadbdaae-35f2-4ec7-90a5-1f74e7935fa9 
+    client_secret: 36088666-047f-44d6-a1d4-8a8370a704db
   entities:
     default:
       admin:
@@ -47,6 +48,8 @@ app:
   constants:
     transaction-limit-per-day: 10
     document-max-size-MB: 10
+    client-app-transaction-limit-per-day: 14
+    client-app-document-max-size-MB: 14
 springdoc:
   api-docs:
     path: /api-docs
