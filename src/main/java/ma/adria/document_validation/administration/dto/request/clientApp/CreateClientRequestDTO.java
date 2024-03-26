@@ -7,7 +7,6 @@ import javax.validation.constraints.NotEmpty;
 import java.util.List;
 @Getter @Setter
 public class CreateClientRequestDTO {
-    private String clientId;
     private List<String> redirectUris;
     @NotEmpty
     private String companyName;

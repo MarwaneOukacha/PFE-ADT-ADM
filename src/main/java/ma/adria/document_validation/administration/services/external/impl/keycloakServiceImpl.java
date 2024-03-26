@@ -256,7 +256,6 @@ public class keycloakServiceImpl implements KeycloakService {
         HttpEntity<String> request = new HttpEntity<>(requestBody,headers);
         System.out.println(keycloakUrlClients+"/"+keycloakID+"/client-secret");
         ResponseEntity<keycloakSecretResponseDTO> response = restTemplate.postForEntity(keycloakUrlClients+"/"+keycloakID+"/client-secret", request, keycloakSecretResponseDTO.class);
-        //TODO:vous n'arriver pas à obtenir le secret
         if (response.getStatusCode() == HttpStatus.OK) {
             log.info("client secret créé avec succès!");
             return response.getBody().getValue();

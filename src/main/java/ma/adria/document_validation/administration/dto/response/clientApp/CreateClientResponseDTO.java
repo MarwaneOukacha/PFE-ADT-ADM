@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CreateClientResponseDTO {
     private String id;
+    private String secret;
     private String companyName;
     private String codeApp;
     private clientStatus statut;

@@ -105,7 +105,6 @@ public class UserServiceImpl implements UserService {
 
         Page<Utilisateur> usersPage = userDAO.getPage(userSpec, pageable);
         return usersPage.map(
-                //TODO:il faut verifier le cas ou tous les chmanps sont vide
                 utilisateurMapper::mapUserToUserSearchResponseDTO
 
         );
@@ -230,32 +229,43 @@ public class UserServiceImpl implements UserService {
 
 
     private Specification<Utilisateur> getUserSpecification(UserPageRequestDTO request, String connectedUserEmail) {
-
+        Boolean allFieldsEmptyOrNull;
         Specification<Utilisateur> spec = (root, query, criteriaBuilder) ->
                 criteriaBuilder.isNotNull(root.get("id"));
         spec = spec.and(userSpecification.emailDifferent(connectedUserEmail));
-
-        if (request.getEmail() != null) {
-            spec = spec.and(userSpecification.emailEquals(request.getEmail()));
+        if (!StringUtils.hasText(request.getPrenom()) &&
+                StringUtils.hasText(request.getStatut()) &&
+                !StringUtils.hasText(request.getNumTele()) &&
+                !StringUtils.hasText(request.getEmail()) &&
+                !StringUtils.hasText(request.getNom())) {
+            allFieldsEmptyOrNull = true;
         }
 
-        if (request.getPrenom() != null) {
-            spec = spec.and(userSpecification.firstNameLike(request.getPrenom()));
+        else allFieldsEmptyOrNull = false;
+        if(allFieldsEmptyOrNull = false){
+            if (request.getEmail() != null) {
+                spec = spec.and(userSpecification.emailEquals(request.getEmail()));
+            }
+
+            if (request.getPrenom() != null) {
+                spec = spec.and(userSpecification.firstNameLike(request.getPrenom()));
+            }
+
+            if (request.getNom() != null) {
+                spec = spec.and(userSpecification.lastNameLike(request.getNom()));
+            }
+
+            if (request.getStatut() != null) {
+                spec = spec.and(userSpecification.statusEqual(UserStatus.valueOf(request.getStatut())));
+            }
+            if (request.getEmail() != null) {
+                spec = spec.and(userSpecification.emailEquals(request.getEmail()));
+            }
+            if (request.getNumTele() != null) {
+                spec = spec.and(userSpecification.telephoneNumberEquals(request.getNumTele()));
+            }
         }
 
-        if (request.getNom() != null) {
-            spec = spec.and(userSpecification.lastNameLike(request.getNom()));
-        }
-
-        if (request.getStatut() != null) {
-            spec = spec.and(userSpecification.statusEqual(UserStatus.valueOf(request.getStatut())));
-        }
-        if (request.getEmail() != null) {
-            spec = spec.and(userSpecification.emailEquals(request.getEmail()));
-        }
-        if (request.getNumTele() != null) {
-            spec = spec.and(userSpecification.telephoneNumberEquals(request.getNumTele()));
-        }
         return spec;
 
     }

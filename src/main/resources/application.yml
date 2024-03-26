@@ -8,7 +8,7 @@ spring:
     name: Administration
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   config:
     import: "configserver:http://localhost:8788"
   cloud:

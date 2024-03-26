@@ -33,37 +33,41 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(rollbackOn = Exception.class)
 public class ClientApplicationServiceImpl implements IClientService {
     private final ClientMapper clientMapper ;
-    private static int codeapp=1;
+    private int codeapp=1;
     private final IClientAppDAO clientDAO ;
     private final IADTConstDAO iADTConstDAO;
     private final ClientSpecification clientSpecification ;
     private final KeycloakService keycloakService;
     @Override
-    public CreateClientResponseDTO add(CreateClientRequestDTO user) {
+    public CreateClientResponseDTO add(CreateClientRequestDTO app) {
+        if(clientDAO.count()!=0){
+            codeapp= (int) clientDAO.count()+1;
+        }
         ClientApplication clientApplication=ClientApplication.builder()
                 .codeApp("app"+Integer.toString(codeapp))
                 .nbrMaxTransactions(Integer.parseInt(iADTConstDAO.findADTConstByCode(ADTConstCode.CLIENT_APP_TRANSACTION_LIMIT_PER_DAY).getValue()))
                 .sizeMax(Integer.parseInt(iADTConstDAO.findADTConstByCode(ADTConstCode.CLIENT_APP_DOCUMENT_MAX_SIZE_MB).getValue()))
-                .companyName(user.getCompanyName())
-                .name(user.getName())
+                .companyName(app.getCompanyName())
+                .name(app.getName())
                 .statut(clientStatus.DISABLED)
                 .build();
         clientDAO.save(clientApplication);
-        codeapp++;
         KeycloakClientDTO kdto=new KeycloakClientDTO();
-        kdto.setClientId(user.getClientId());
-        kdto.setRedirectUris(user.getRedirectUris());
+        kdto.setClientId(clientApplication.getCodeApp());
+        kdto.setRedirectUris(app.getRedirectUris());
         AddClientToKeycloakResponseDTO addClientToKeycloakResponseDTO= keycloakService.addClientToKeycloak(kdto);
         clientApplication=clientApplication.toBuilder().secret(addClientToKeycloakResponseDTO.getSecret())
                 .keycloakClientId(addClientToKeycloakResponseDTO.getKeycloakID()).build();
-        ClientApplication app= clientDAO.save(clientApplication);
-        return clientMapper.toClientResponseApplication(app);
+        ClientApplication appp= clientDAO.save(clientApplication);
+        return clientMapper.toClientResponseApplication(appp);
     }
 
     @Override
@@ -124,21 +128,30 @@ public class ClientApplicationServiceImpl implements IClientService {
 
         Specification<ClientApplication> spec = (root, query, criteriaBuilder) ->
                 criteriaBuilder.isNotNull(root.get("id"));
+        boolean allFieldsEmptyOrNull;
+        if (!StringUtils.hasText(request.getCompanyName()) &&
+                StringUtils.isEmpty(request.getStatut()) &&
+                !StringUtils.hasText(request.getName())) allFieldsEmptyOrNull = true;
+        else allFieldsEmptyOrNull = false;
+        if (allFieldsEmptyOrNull==false) {
+            if (StringUtils.hasText(request.getCompanyName())) {
+                spec = spec.and(clientSpecification.companyNameLike(request.getCompanyName()));
+            }
 
-        if (StringUtils.hasText(request.getCompanyName())) {
-            spec = spec.and(clientSpecification.companyNameLike(request.getCompanyName()));
+            if(StringUtils.hasText(request.getStatut().toString())){
+                spec = spec.and(clientSpecification.statusEqual(request.getStatut()));
+            }
+
+            if (StringUtils.hasText(request.getName())) {
+                spec = spec.and(clientSpecification.nameLike(request.getName()));
+            }
         }
 
-        if(StringUtils.hasText(request.getStatut().toString())){
-            spec = spec.and(clientSpecification.statusEqual(request.getStatut()));
-        }
 
-        if (StringUtils.hasText(request.getName())) {
-            spec = spec.and(clientSpecification.nameLike(request.getName()));
-        }
 
         return  spec ;
 
     }
+
 
 }
