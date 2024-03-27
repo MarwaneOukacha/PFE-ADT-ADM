@@ -9,6 +9,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import ma.adria.document_validation.administration.dto.keycloak.*;
 import ma.adria.document_validation.administration.dto.request.clientApp.EditClientAppNameRequestDTO;
+import ma.adria.document_validation.administration.dto.response.RoleDtoKeycloakResponse;
 import ma.adria.document_validation.administration.dto.response.clientApp.EditClientResponseDTO;
 import ma.adria.document_validation.administration.dto.response.keycloak.AddClientToKeycloakResponseDTO;
 import ma.adria.document_validation.administration.dto.response.keycloak.keycloakSecretResponseDTO;
@@ -18,6 +19,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -34,6 +38,9 @@ public class keycloakServiceImpl implements KeycloakService {
 
     @Value("${app.key_cloak.client_secret}")
     private String clientSecret;
+    @Value("${app.key_cloak.keycloak_client_id}")
+    private String keycloakClientId;
+
 
     @Value("${app.key_cloak.users}")
     private String keycloakUrlUser;
@@ -254,7 +261,6 @@ public class keycloakServiceImpl implements KeycloakService {
                 "}";
 
         HttpEntity<String> request = new HttpEntity<>(requestBody,headers);
-        System.out.println(keycloakUrlClients+"/"+keycloakID+"/client-secret");
         ResponseEntity<keycloakSecretResponseDTO> response = restTemplate.postForEntity(keycloakUrlClients+"/"+keycloakID+"/client-secret", request, keycloakSecretResponseDTO.class);
         if (response.getStatusCode() == HttpStatus.OK) {
             log.info("client secret créé avec succès!");
@@ -264,6 +270,70 @@ public class keycloakServiceImpl implements KeycloakService {
             return null;
         }
     }
+
+    @Override
+    public ResponseEntity<String> getRole(String roleName) {
+        HttpHeaders headers = setTokenAuthorizationHeaders();
+        HttpEntity<String> request = new HttpEntity<>(headers);
+
+        // Imprime l'URL de la requête pour le débogage
+        String requestUrl = keycloakUrlClients + "/ec335d53-dc1d-45c7-b7f2-f632c969c9db/roles/" + roleName;
+        System.out.println("Request URL: " + requestUrl);
+
+        // Utilisation de RestTemplate exchange pour une flexibilité accrue
+        ResponseEntity<String> response = null;
+        try {
+            response = restTemplate.exchange(
+                    requestUrl,
+                    HttpMethod.GET,
+                    request,
+                    String.class
+            );
+
+            if (response.getStatusCode() == HttpStatus.OK) {
+                log.info("Succès!");
+                return response;
+            } else {
+                log.error("Erreur : " + response.getBody());
+                return null;
+            }
+        } catch (Exception e) {
+            log.error("Une erreur s'est produite lors de la requête : " + e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public void AssignRoleToUser(String keycloakUserID, String roleName) {
+        HttpHeaders headers = setTokenAuthorizationHeaders();
+        ResponseEntity<String> res = getRole(roleName);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        String requestBody = "";
+        //TODO:il faut terminer cette fonction
+        try {
+            String jsonRole = res.getBody();
+            RoleDtoKeycloakResponse roleAssignment = objectMapper.readValue(jsonRole, RoleDtoKeycloakResponse.class);
+
+            requestBody = objectMapper.writeValueAsString(roleAssignment);
+        } catch (JsonProcessingException e) {
+            log.error("Erreur lors de la conversion de l'objet en JSON :" + e.getMessage());
+        }
+
+        System.out.println("[" + requestBody + "]");
+    HttpEntity<String> request = new HttpEntity<>("[" + requestBody + "]", headers);
+    String requestURL = keycloakUrlUser + "/" + keycloakUserID + "/role-mappings/clients/" + keycloakClientId;
+    ResponseEntity<String> response = restTemplate.exchange(
+            requestURL,
+            HttpMethod.POST,
+            request, String.class);
+    if (response.getStatusCode() == HttpStatus.NO_CONTENT) {
+        log.info("Role assigned!");
+    } else {
+        log.error("Erreur : " + response.getBody());
+    }
+    }
+
 
     private HttpHeaders setTokenAuthorizationHeaders() {
         HttpHeaders headers = new HttpHeaders();

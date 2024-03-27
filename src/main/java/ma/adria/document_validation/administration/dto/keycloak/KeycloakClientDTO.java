@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Map;
 
 @Getter @Setter
 public class KeycloakClientDTO {
@@ -15,4 +16,5 @@ public class KeycloakClientDTO {
     private final String protocol="openid-connect";
     private final String secret="fggg";
     private final String clientAuthenticatorType="client-secret";
+    //private Map<String, Map<String, List<String>>> resourceAccess;
 }

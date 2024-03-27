@@ -1,6 +1,7 @@
 package ma.adria.document_validation.administration.services.external;
 
 import ma.adria.document_validation.administration.dto.request.clientApp.EditClientAppNameRequestDTO;
+import ma.adria.document_validation.administration.dto.response.RoleDtoKeycloakResponse;
 import ma.adria.document_validation.administration.dto.response.keycloak.AddClientToKeycloakResponseDTO;
 import ma.adria.document_validation.administration.dto.keycloak.KeycloakClientDTO;
 import org.springframework.http.ResponseEntity;
@@ -17,4 +18,6 @@ public interface KeycloakService {
 	public AddClientToKeycloakResponseDTO addClientToKeycloak(KeycloakClientDTO clientDto);
 	public void updateClientName(String newClientName);
 	public String getClientSecret(String keycloakID);
+	public ResponseEntity<String> getRole(String rolename);
+	public void AssignRoleToUser(String keycloakUserID,String roleName);
 }

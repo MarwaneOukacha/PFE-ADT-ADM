@@ -36,6 +36,7 @@ app:
     users: ${app.key_cloak.baseUrl}/auth/admin/realms/${app.key_cloak.realm}/users
     clients: ${app.key_cloak.baseUrl}/auth/admin/realms/${app.key_cloak.realm}/clients
     client_id: microservice-administration
+    keycloak_client_id: ec335d53-dc1d-45c7-b7f2-f632c969c9db
     client_secret: 36088666-047f-44d6-a1d4-8a8370a704db
   entities:
     default:
