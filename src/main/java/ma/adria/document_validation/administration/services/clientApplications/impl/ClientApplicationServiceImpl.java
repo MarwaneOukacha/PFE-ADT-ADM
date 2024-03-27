@@ -48,8 +48,9 @@ public class ClientApplicationServiceImpl implements IClientService {
     private final KeycloakService keycloakService;
     @Override
     public CreateClientResponseDTO add(CreateClientRequestDTO app) {
-        if(clientDAO.count()!=0){
-            codeapp= (int) clientDAO.count()+1;
+        int count =(int)clientDAO.count();
+        if(count!=0){
+            codeapp= count+1;
         }
         ClientApplication clientApplication=ClientApplication.builder()
                 .codeApp("app"+Integer.toString(codeapp))
