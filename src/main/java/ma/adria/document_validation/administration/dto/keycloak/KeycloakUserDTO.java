@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class KeycloakUserDTO {
+public class    KeycloakUserDTO {
 
     private String username;
 

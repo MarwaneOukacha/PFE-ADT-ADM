@@ -3,13 +3,16 @@ package ma.adria.document_validation.administration.controller;
 import lombok.RequiredArgsConstructor;
 import ma.adria.document_validation.administration.dto.UtilisateurDTO;
 import ma.adria.document_validation.administration.dto.request.user.*;
+import ma.adria.document_validation.administration.dto.response.RoleDtoKeycloakResponse;
 import ma.adria.document_validation.administration.dto.response.user.CreateUserResponseDTO;
 import ma.adria.document_validation.administration.dto.response.user.EditUserProfileResponseDTO;
 import ma.adria.document_validation.administration.dto.response.user.EditUserResponseDTO;
 import ma.adria.document_validation.administration.dto.response.user.UserPageResponseDTO;
 import ma.adria.document_validation.administration.services.UserService;
+import ma.adria.document_validation.administration.services.external.KeycloakService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,7 +21,6 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
-
     private final UserService userservice;
 
     @PostMapping
@@ -58,6 +60,5 @@ public class UserController {
         return ResponseEntity.ok().body(userservice.getCurrentUserDetails());
     }
 
-
-
+   
 }

@@ -58,18 +58,12 @@ public class UserRunner implements CommandLineRunner {
                 .sizeMax(0)
                 .password(passwordencoder.encode(defaultUserPassword))
                 .build();
-
         userDAO.save(user);
-
         KeycloakUserDTO keycloakUser = utilisateurMapper.toKeycloakUserDTO(user, defaultUserPassword);
-
-
         String keycloakId = keycloakService.addUserToKeycloak(keycloakUser);
-
+        keycloakService.AssignRoleToUser(keycloakId,"ADMIN_ROLE");
         user.setKeycloakId(keycloakId);
-
         userDAO.save(user);
-
     }
 
     @Override

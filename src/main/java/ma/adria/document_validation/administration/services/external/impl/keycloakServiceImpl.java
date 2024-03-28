@@ -310,7 +310,6 @@ public class keycloakServiceImpl implements KeycloakService {
         ObjectMapper objectMapper = new ObjectMapper();
 
         String requestBody = "";
-        //TODO:il faut terminer cette fonction
         try {
             String jsonRole = res.getBody();
             RoleDtoKeycloakResponse roleAssignment = objectMapper.readValue(jsonRole, RoleDtoKeycloakResponse.class);
