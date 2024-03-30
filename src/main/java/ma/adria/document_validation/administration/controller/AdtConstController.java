@@ -8,6 +8,7 @@ import ma.adria.document_validation.administration.dto.request.ADTConst.EditADTC
 import ma.adria.document_validation.administration.dto.response.ADTConst.ADTConstResponseDTO;
 import ma.adria.document_validation.administration.services.adtconstants.IADTConstService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Tag(name = "ADT-const controller")
 @RestController
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/ADTConst")
 @RequiredArgsConstructor
 @Slf4j

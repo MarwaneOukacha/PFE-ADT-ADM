@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
         KeycloakUserDTO keycloakUserDTO = utilisateurMapper.toKeycloakUserDTO(user, userRequestDTO.getPassword());
 
         String keycloakId = keycloakService.addUserToKeycloak(keycloakUserDTO);
-        keycloakService.AssignRoleToUser(keycloakId,"USER_ROLE");
+        keycloakService.AssignRoleToUser(keycloakId,"USER");
         user.setKeycloakId(keycloakId);
         user = userDAO.save(user);
         CreateUserResponseDTO responseDTO = utilisateurMapper.toCreateUtilisateurResponseDTO(user);

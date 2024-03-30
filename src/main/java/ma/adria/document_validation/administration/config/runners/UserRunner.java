@@ -61,7 +61,7 @@ public class UserRunner implements CommandLineRunner {
         userDAO.save(user);
         KeycloakUserDTO keycloakUser = utilisateurMapper.toKeycloakUserDTO(user, defaultUserPassword);
         String keycloakId = keycloakService.addUserToKeycloak(keycloakUser);
-        keycloakService.AssignRoleToUser(keycloakId,"ADMIN_ROLE");
+        keycloakService.AssignRoleToUser(keycloakId,"ADMIN");
         user.setKeycloakId(keycloakId);
         userDAO.save(user);
     }
