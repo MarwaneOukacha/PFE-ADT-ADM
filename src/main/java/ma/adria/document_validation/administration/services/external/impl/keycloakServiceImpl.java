@@ -9,7 +9,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import ma.adria.document_validation.administration.dto.keycloak.*;
 import ma.adria.document_validation.administration.dto.request.clientApp.EditClientAppNameRequestDTO;
-import ma.adria.document_validation.administration.dto.response.RoleDtoKeycloakResponse;
+import ma.adria.document_validation.administration.dto.response.keycloak.RoleDtoKeycloakResponse;
 import ma.adria.document_validation.administration.dto.response.clientApp.EditClientResponseDTO;
 import ma.adria.document_validation.administration.dto.response.keycloak.AddClientToKeycloakResponseDTO;
 import ma.adria.document_validation.administration.dto.response.keycloak.keycloakSecretResponseDTO;
@@ -19,9 +19,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
-import java.util.Map;
 
 
 @Service

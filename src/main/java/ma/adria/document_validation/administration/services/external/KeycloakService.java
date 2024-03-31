@@ -1,7 +1,6 @@
 package ma.adria.document_validation.administration.services.external;
 
 import ma.adria.document_validation.administration.dto.request.clientApp.EditClientAppNameRequestDTO;
-import ma.adria.document_validation.administration.dto.response.RoleDtoKeycloakResponse;
 import ma.adria.document_validation.administration.dto.response.keycloak.AddClientToKeycloakResponseDTO;
 import ma.adria.document_validation.administration.dto.keycloak.KeycloakClientDTO;
 import org.springframework.http.ResponseEntity;
