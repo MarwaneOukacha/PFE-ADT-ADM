@@ -80,7 +80,7 @@ public class keycloakServiceImpl implements KeycloakService {
             requestBody = objectMapper.writeValueAsString(dto);
 
         } catch (JsonProcessingException e) {
-            log.error("Erreur lors de la conversion de l'objet en JSON :"  + e.getMessage());
+            throw new RuntimeException("Erreur lors de la conversion de l'objet en JSON : " + e.getMessage(), e);
 
         }
 
@@ -93,8 +93,8 @@ public class keycloakServiceImpl implements KeycloakService {
             return getUserKeycloakIdFromResponse(response);
 
         } else {
-            log.error("Erreur lors de la création de l'utilisateur : " + response.getBody());
-            return null;
+            throw new RuntimeException("Erreur lors de la création de l'utilisateur : " + response.getBody());
+
         }
     }
 
@@ -108,7 +108,7 @@ public class keycloakServiceImpl implements KeycloakService {
         try {
             requestBody = objectMapper.writeValueAsString(password);
         } catch (JsonProcessingException e) {
-            log.error("Erreur lors de la conversion de l'objet en JSON : " + e.getMessage());
+            throw new RuntimeException("Erreur lors de la conversion de l'objet en JSON : " + e.getMessage(), e);
         }
         HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
 
@@ -123,7 +123,7 @@ public class keycloakServiceImpl implements KeycloakService {
         if (response.getStatusCode() == HttpStatus.CREATED) {
             log.info("Utilisateur modifié avec succès ! ");
         } else {
-            log.error("Erreur lors de la création de l'utilisateur : " + response.getBody());
+            throw new RuntimeException("Erreur lors de la modification de l'utilisateur : " + response.getBody());
         }
     }
 
@@ -144,8 +144,7 @@ public class keycloakServiceImpl implements KeycloakService {
             return accessToken;
         } catch (Exception e) {
             // Gérez les erreurs de parsing JSON ici
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException("Une erreur s'est produite lors de l'extraction du token : " + e.getMessage(), e);
         }
     }
 
@@ -163,8 +162,7 @@ public class keycloakServiceImpl implements KeycloakService {
         try {
             requestBody = new ObjectMapper().writeValueAsString(usernameDTO);
         } catch (JsonProcessingException e) {
-            System.err.println("Erreur lors de la conversion de l'objet en JSON : " + e.getMessage());
-            return; // Handle the exception appropriately
+            throw new RuntimeException("Erreur lors de la conversion de l'objet en JSON : " + e.getMessage(), e);
         }
 
 
@@ -183,7 +181,7 @@ public class keycloakServiceImpl implements KeycloakService {
         if (response.getStatusCode() == HttpStatus.NO_CONTENT) {
             System.out.println("keycloak: Nom d'utilisateur mis à jour avec succès!");
         } else {
-            System.err.println("keycloak: Erreur lors de la mise à jour du nom d'utilisateur : " + response.getBody());
+            throw new RuntimeException("keycloak: Erreur lors de la mise à jour du nom d'utilisateur : " + response.getBody());
         }
     }
 
@@ -221,7 +219,7 @@ public class keycloakServiceImpl implements KeycloakService {
             requestBody = objectMapper.writeValueAsString(clientDto);
 
         } catch (JsonProcessingException e) {
-            log.error("Erreur lors de la conversion de l'objet en JSON :"  + e.getMessage());
+            throw new RuntimeException("Erreur lors de la conversion de l'objet en JSON : " + e.getMessage(), e);
 
         }
 
@@ -239,8 +237,8 @@ public class keycloakServiceImpl implements KeycloakService {
                     .build();
 
         } else {
-            log.error("Erreur lors de la création du client : " + response.getBody());
-            return null;
+            throw new RuntimeException("Erreur lors de la création du client : " + response.getBody());
+
         }
     }
 
@@ -266,8 +264,8 @@ public class keycloakServiceImpl implements KeycloakService {
             log.info("client secret créé avec succès!");
             return response.getBody().getValue();
         } else {
-            log.error("Erreur lors de la création du secret : " + response.getBody());
-            return null;
+            throw new RuntimeException("Erreur lors de la création du secret : " + response.getBody());
+
         }
     }
 
@@ -294,12 +292,13 @@ public class keycloakServiceImpl implements KeycloakService {
                 log.info("Succès!");
                 return response;
             } else {
-                log.error("Erreur : " + response.getBody());
-                return null;
+                throw new RuntimeException("Erreur : " + response.getBody());
             }
         } catch (Exception e) {
-            log.error("Une erreur s'est produite lors de la requête : " + e.getMessage());
-            return null;
+
+            throw new RuntimeException("Une erreur s'est produite lors de la requête : " + e.getMessage());
+
+
         }
     }
 
@@ -329,7 +328,7 @@ public class keycloakServiceImpl implements KeycloakService {
     if (response.getStatusCode() == HttpStatus.NO_CONTENT) {
         log.info("Role assigned!");
     } else {
-        log.error("Erreur : " + response.getBody());
+        throw new RuntimeException("Erreur : " + response.getBody());
     }
     }
 

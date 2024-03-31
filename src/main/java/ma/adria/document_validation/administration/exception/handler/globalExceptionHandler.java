@@ -19,48 +19,10 @@ import java.util.NoSuchElementException;
 @RestControllerAdvice
 public class globalExceptionHandler {
 
-    @ExceptionHandler(UserException.class)
+    @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, String> handleInvalidUserDataExceptions(UserException ex) {
+    public Map<String, String> handleExceptions(Exception ex) {
         Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("error", ex.getMessage());
-        return errorMap;
-    }
-
-    @ExceptionHandler(KeycloakException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, String> handleKycloakException(KeycloakException ex) {
-        Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("error", ex.getMessage());
-        return errorMap;
-    }
-
-    @ExceptionHandler(NoSuchElementException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, String> handleInvalidEmailException(NoSuchElementException ex) {
-        Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("error", ex.getMessage());
-        return errorMap;
-    }
-
-    @ExceptionHandler(GenericException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, String> handleGenericException(GenericException ex) {
-        Map<String,String> errorMap=new HashMap<>();
-        errorMap.put("error", ex.getMessage());
-        return errorMap;
-    }
-    @ExceptionHandler(ResourceAlreadyExistsException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, String> handleResourceAlreadyExistsException(ResourceAlreadyExistsException ex) {
-        Map<String,String> errorMap=new HashMap<>();
-        errorMap.put("error", ex.getMessage());
-        return errorMap;
-    }
-    @ExceptionHandler(ResourceNotFoundException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, String> handleResourceNotFoundException(ResourceNotFoundException ex) {
-        Map<String,String> errorMap=new HashMap<>();
         errorMap.put("error", ex.getMessage());
         return errorMap;
     }

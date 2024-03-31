@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-@Transactional
+@Transactional(rollbackOn = Exception.class)
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
