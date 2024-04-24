@@ -173,6 +173,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UtilisateurDTO getUserByKeycloakId(String id) {
+        Utilisateur user = userDAO.findByKeycloakUserId(id);
+        UtilisateurDTO utilisateurDTO = utilisateurMapper.toUtilisateurDTO(user);
+        return utilisateurDTO;
+    }
+
+    @Override
     public EditUserResponseDTO editUser(EditUserRequestDTO user) {
         Utilisateur utilisateur = userDAO.findById(UUID.fromString(user.getId()));
 

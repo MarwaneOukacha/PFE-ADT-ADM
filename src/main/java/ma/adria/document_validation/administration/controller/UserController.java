@@ -68,5 +68,9 @@ public class UserController {
     public String test(){
         return  "This is an admin endpoint!";
     }
-   
+   @GetMapping("/bykeycloak/{keycloakID}")
+    public UtilisateurDTO getUserByKeycloakID(@PathVariable("keycloakID") String keyID){
+       return userservice.getUserByKeycloakId(keyID);
+   }
 }
+

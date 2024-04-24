@@ -21,7 +21,6 @@ public class ClientAppController {
     @PostMapping
     public CreateClientResponseDTO createUser(@RequestBody CreateClientRequestDTO dto){
         return clientService.add(dto);
-
     }
     @PutMapping("")
     public EditClientResponseDTO edit(@RequestBody EditClientRequestDTO dto){
