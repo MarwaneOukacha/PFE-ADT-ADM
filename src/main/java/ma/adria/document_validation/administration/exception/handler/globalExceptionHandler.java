@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
 @RestControllerAdvice
 public class globalExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+   @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public Map<String, String> handleExceptions(Exception ex) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("error", ex.getMessage());

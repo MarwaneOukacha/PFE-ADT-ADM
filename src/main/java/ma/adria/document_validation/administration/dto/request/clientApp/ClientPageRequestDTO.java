@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ma.adria.document_validation.administration.dto.PageableDTO;
 import ma.adria.document_validation.administration.model.enums.clientStatus;
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class ClientPageRequestDTO extends PageableDTO {
     private String companyName;

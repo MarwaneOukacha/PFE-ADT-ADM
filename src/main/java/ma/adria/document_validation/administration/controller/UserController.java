@@ -63,11 +63,6 @@ public class UserController {
     public ResponseEntity<UtilisateurDTO> getCurrentUserDetails() {
         return ResponseEntity.ok().body(userservice.getCurrentUserDetails());
     }
-    @GetMapping("/test")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public String test(){
-        return  "This is an admin endpoint!";
-    }
    @GetMapping("/bykeycloak/{keycloakID}")
     public UtilisateurDTO getUserByKeycloakID(@PathVariable("keycloakID") String keyID){
        return userservice.getUserByKeycloakId(keyID);

@@ -85,6 +85,7 @@ public class UserServiceImpl implements UserService {
         keycloakService.AssignRoleToUser(keycloakId,"USER");
         user.setKeycloakId(keycloakId);
         user = userDAO.save(user);
+        //TODO:send email to activate acount
         CreateUserResponseDTO responseDTO = utilisateurMapper.toCreateUtilisateurResponseDTO(user);
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
 

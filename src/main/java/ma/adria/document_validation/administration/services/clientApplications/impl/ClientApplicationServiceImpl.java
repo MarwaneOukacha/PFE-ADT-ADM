@@ -10,7 +10,6 @@ import ma.adria.document_validation.administration.dto.request.clientApp.ClientP
 import ma.adria.document_validation.administration.dto.request.clientApp.CreateClientRequestDTO;
 import ma.adria.document_validation.administration.dto.request.clientApp.EditClientRequestDTO;
 import ma.adria.document_validation.administration.dto.response.clientApp.*;
-import ma.adria.document_validation.administration.exception.ResourceAlreadyExistsException;
 import ma.adria.document_validation.administration.exception.ResourceNotFoundException;
 import ma.adria.document_validation.administration.mapper.ClientMapper;
 import ma.adria.document_validation.administration.model.entities.ClientApplication;
@@ -33,8 +32,6 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
@@ -73,37 +70,44 @@ public class ClientApplicationServiceImpl implements IClientService {
 
     @Override
     public EditClientResponseDTO edit(EditClientRequestDTO editClientRequestDTO) {
-        ClientApplication app= clientDAO.findClientById(UUID.fromString(editClientRequestDTO.getId()));
-        if(app==null){
+        ClientApplication app = clientDAO.findClientById(UUID.fromString(editClientRequestDTO.getId()));
+        if (app == null) {
             throw new ResourceNotFoundException(ErrorCode.CLIENT_APP_NOT_FOUND);
         }
-        if(StringUtils.hasText(editClientRequestDTO.getStatut())){
+
+        if (editClientRequestDTO.getStatut() != null && StringUtils.hasText(editClientRequestDTO.getStatut())) {
             app.setStatut(clientStatus.valueOf(editClientRequestDTO.getStatut()));
         }
-        if(StringUtils.hasText(editClientRequestDTO.getName())){
+
+        if (editClientRequestDTO.getName() != null && StringUtils.hasText(editClientRequestDTO.getName())) {
             app.setName(editClientRequestDTO.getName());
         }
-        if(StringUtils.hasText(editClientRequestDTO.getCompanyName())){
+
+        if (editClientRequestDTO.getCompanyName() != null && StringUtils.hasText(editClientRequestDTO.getCompanyName())) {
             app.setCompanyName(editClientRequestDTO.getCompanyName());
         }
-        if(editClientRequestDTO.getSizeMax()!=0){
+
+        if (editClientRequestDTO.getSizeMax() != 0) {
             app.setSizeMax(editClientRequestDTO.getSizeMax());
         }
-        if(editClientRequestDTO.getNbrMaxTransactions()!=0){
+
+        if (editClientRequestDTO.getNbrMaxTransactions() != 0) {
             app.setNbrMaxTransactions(editClientRequestDTO.getNbrMaxTransactions());
         }
-        ClientApplication clientApp= clientDAO.save(app);
-        EditClientResponseDTO res=clientMapper.toEditClientResponseDTO(clientApp);
-        if(clientApp!=null){
-            EditClientAppNameRequestDTO appClient= EditClientAppNameRequestDTO.builder()
+        ClientApplication clientApp = clientDAO.save(app);
+        EditClientResponseDTO res = clientMapper.toEditClientResponseDTO(clientApp);
+        if (clientApp != null) {
+
+            EditClientAppNameRequestDTO appClient = EditClientAppNameRequestDTO.builder()
                     .redirectUris(new ArrayList<>())
                     .webOrigins(new ArrayList<>())
                     .clientId(clientApp.getName())
                     .build();
-            keycloakService.updateClientAppName(appClient, String.valueOf(clientApp.getKeycloakClientId()));
+            keycloakService.updateClientAppName(appClient, clientApp.getKeycloakClientId());
         }
         return res;
     }
+
 
     @Override
     public Page<ClientPageResponseDTO> getPage(ClientPageRequestDTO clientPageRequestDTO) {
@@ -136,15 +140,17 @@ public class ClientApplicationServiceImpl implements IClientService {
         else allFieldsEmptyOrNull = false;
         if (allFieldsEmptyOrNull==false) {
             if (StringUtils.hasText(request.getCompanyName())) {
-                spec = spec.and(clientSpecification.companyNameLike(request.getCompanyName()));
+                System.out.println("companyName: "+request.getCompanyName());
+                spec = spec.and(clientSpecification.companyNameEqual(request.getCompanyName()));
             }
 
-            if(StringUtils.hasText(request.getStatut().toString())){
+            if(request.getStatut() != null && !request.getStatut().toString().equals("")){
                 spec = spec.and(clientSpecification.statusEqual(request.getStatut()));
             }
 
             if (StringUtils.hasText(request.getName())) {
-                spec = spec.and(clientSpecification.nameLike(request.getName()));
+
+                spec = spec.and(clientSpecification.nameEqual(request.getName()));
             }
         }
 

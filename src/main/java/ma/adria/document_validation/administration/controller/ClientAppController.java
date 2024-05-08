@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class ClientAppController {
     private final IClientService clientService;
     @PostMapping
-    public CreateClientResponseDTO createUser(@RequestBody CreateClientRequestDTO dto){
+    public CreateClientResponseDTO createApp(@RequestBody CreateClientRequestDTO dto){
         return clientService.add(dto);
     }
     @PutMapping("")
@@ -27,11 +27,12 @@ public class ClientAppController {
         return clientService.edit(dto);
     }
     @GetMapping("/page")
-    public Page<ClientPageResponseDTO> getPage(@RequestBody ClientPageRequestDTO clientPageRequestDTO){
+    public Page<ClientPageResponseDTO> getPage(ClientPageRequestDTO clientPageRequestDTO){
         return clientService.getPage(clientPageRequestDTO);
     }
     @GetMapping("/details/{id}")
     public ClientDetailsResponseDTO getClientDetails(@PathVariable String id){
+        System.out.println(id);
         return clientService.getClientById(id);
     }
 }

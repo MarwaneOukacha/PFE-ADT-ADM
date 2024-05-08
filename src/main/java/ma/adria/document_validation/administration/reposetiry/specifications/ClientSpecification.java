@@ -2,15 +2,14 @@ package ma.adria.document_validation.administration.reposetiry.specifications;
 
 import ma.adria.document_validation.administration.model.entities.ClientApplication;
 import ma.adria.document_validation.administration.model.enums.clientStatus;
-import ma.adria.document_validation.administration.reposetiry.ClientApplicationRepository;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ClientSpecification {
-    public Specification<ClientApplication> companyNameLike(String companyName) {
+    public Specification<ClientApplication> companyNameEqual(String companyName) {
         return (root, query, criteriaBuilder) ->
-                criteriaBuilder.like(criteriaBuilder.lower(root.get("companyName")), "%" + companyName.toLowerCase() + "%");
+                criteriaBuilder.equal(root.get("companyName"),  companyName );
     }
 
     public Specification<ClientApplication> statusEqual(clientStatus status) {
@@ -22,9 +21,9 @@ public class ClientSpecification {
                 criteriaBuilder.equal(root.get("codeApp"), codeApp);
     }
 
-    public Specification<ClientApplication> nameLike(String name) {
+    public Specification<ClientApplication> nameEqual(String name) {
         return (root, query, criteriaBuilder) ->
-                criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + name.toLowerCase() + "%");
+                criteriaBuilder.equal(root.get("name"),  name );
     }
 
     public Specification<ClientApplication> nbrMaxTransactionsGreaterThan(int nbrMaxTransactions) {
