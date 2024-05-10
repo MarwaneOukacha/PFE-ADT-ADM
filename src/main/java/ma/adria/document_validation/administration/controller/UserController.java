@@ -58,6 +58,7 @@ public class UserController {
         userservice.resetPassword(request);
         return ResponseEntity.ok().build();
     }
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     @GetMapping("user/details")
     public ResponseEntity<UtilisateurDTO> getCurrentUserDetails() {
         return ResponseEntity.ok().body(userservice.getCurrentUserDetails());
