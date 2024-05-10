@@ -136,8 +136,7 @@ public class ClientApplicationServiceImpl implements IClientService {
         boolean allFieldsEmptyOrNull;
         if (!StringUtils.hasText(request.getCompanyName()) &&
                 StringUtils.isEmpty(request.getStatut()) &&
-                !StringUtils.hasText(request.getName()) &&
-                !StringUtils.hasText(request.getId())
+                !StringUtils.hasText(request.getName())
         ) allFieldsEmptyOrNull = true;
         else allFieldsEmptyOrNull = false;
 
