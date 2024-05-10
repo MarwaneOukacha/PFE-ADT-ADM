@@ -20,4 +20,5 @@ public class CreateUserRequestDTO {
     @NotNull
     private String password ;
 
+
 }

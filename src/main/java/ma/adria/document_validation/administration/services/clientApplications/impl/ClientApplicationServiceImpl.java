@@ -136,11 +136,13 @@ public class ClientApplicationServiceImpl implements IClientService {
         boolean allFieldsEmptyOrNull;
         if (!StringUtils.hasText(request.getCompanyName()) &&
                 StringUtils.isEmpty(request.getStatut()) &&
-                !StringUtils.hasText(request.getName())) allFieldsEmptyOrNull = true;
+                !StringUtils.hasText(request.getName()) &&
+                !StringUtils.hasText(request.getId())
+        ) allFieldsEmptyOrNull = true;
         else allFieldsEmptyOrNull = false;
+
         if (allFieldsEmptyOrNull==false) {
             if (StringUtils.hasText(request.getCompanyName())) {
-                System.out.println("companyName: "+request.getCompanyName());
                 spec = spec.and(clientSpecification.companyNameEqual(request.getCompanyName()));
             }
 

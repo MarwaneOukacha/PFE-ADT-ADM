@@ -21,7 +21,7 @@ import javax.validation.Valid;
 public class UserController {
     private final UserService userservice;
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<CreateUserResponseDTO> createUser(@RequestBody CreateUserRequestDTO user){
 
         return userservice.createUtilisateur(user);
@@ -33,7 +33,7 @@ public class UserController {
 
         return ResponseEntity.ok().body(userservice.getPage(userPageRequestDTO));
     }
-    @GetMapping("/{id}")
+    @GetMapping("admin/details/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UtilisateurDTO> getUserById(@PathVariable String id) {
 
@@ -58,8 +58,7 @@ public class UserController {
         userservice.resetPassword(request);
         return ResponseEntity.ok().build();
     }
-    @GetMapping("/details")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("user/details")
     public ResponseEntity<UtilisateurDTO> getCurrentUserDetails() {
         return ResponseEntity.ok().body(userservice.getCurrentUserDetails());
     }
