@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping(value = "/page")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Page<UserPageResponseDTO>> page(@RequestBody UserPageRequestDTO userPageRequestDTO) {
+    public ResponseEntity<Page<UserPageResponseDTO>> page( UserPageRequestDTO userPageRequestDTO) {
 
         return ResponseEntity.ok().body(userservice.getPage(userPageRequestDTO));
     }

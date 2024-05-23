@@ -22,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @Validated
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AdtConstController {
 
     private final IADTConstService adtConstService;

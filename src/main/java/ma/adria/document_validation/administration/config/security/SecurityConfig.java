@@ -9,6 +9,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
@@ -39,26 +40,19 @@ public class SecurityConfig implements WebMvcConfigurer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(Customizer.withDefaults())
-                .cors(Customizer.withDefaults())
+                .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize.antMatchers(PUBLIC_RESOURCES).permitAll()
                         .anyRequest().authenticated()
                 );
 
-        http.oauth2ResourceServer().jwt()
-                .jwtAuthenticationConverter(jwtAuthenticationConverter());
+            http.oauth2ResourceServer().jwt()
+                    .jwtAuthenticationConverter(jwtAuthenticationConverter());
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         return http.build();
     }
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "OPTIONS", "PATCH")
-                .exposedHeaders(HttpHeaders.CONTENT_DISPOSITION)
-        ;
-    }
+
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         return new CustomJwtAuthenticationConverter();
