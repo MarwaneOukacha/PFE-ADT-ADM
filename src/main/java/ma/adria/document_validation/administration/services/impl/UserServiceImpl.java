@@ -200,6 +200,10 @@ public class UserServiceImpl implements UserService {
             utilisateur.setNom(user.getNom());
         }
 
+        if (StringUtils.hasText(user.getNumTele())) {
+            utilisateur.setNumTele(user.getNumTele());
+        }
+
 
         if (StringUtils.hasText(user.getPassword())) {
             utilisateur.setPassword(passwordencoder.encode(user.getPassword()));
@@ -263,9 +267,7 @@ public class UserServiceImpl implements UserService {
             if (request.getStatut() != null) {
                 spec = spec.and(userSpecification.statusEqual(UserStatus.valueOf(request.getStatut())));
             }
-            if (request.getEmail() != null) {
-                spec = spec.and(userSpecification.emailEquals(request.getEmail()));
-            }
+
             if (request.getNumTele() != null) {
                 spec = spec.and(userSpecification.telephoneNumberEquals(request.getNumTele()));
             }
