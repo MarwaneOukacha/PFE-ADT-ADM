@@ -129,7 +129,7 @@ public class UserServiceImpl implements UserService {
             utilisateur.setNom(user.getNom());
         }
         if (StringUtils.hasText(user.getNumTele())) {
-            utilisateur.setNom(user.getNumTele());
+            utilisateur.setNumTele(user.getNumTele());
         }
         userDAO.save(utilisateur);
         return utilisateurMapper.toEditUtilisateurProfileResponseDTO(utilisateur);
@@ -238,43 +238,42 @@ public class UserServiceImpl implements UserService {
 
 
     private Specification<Utilisateur> getUserSpecification(UserPageRequestDTO request, String connectedUserEmail) {
-        Boolean allFieldsEmptyOrNull;
-        Specification<Utilisateur> spec = (root, query, criteriaBuilder) ->
-                criteriaBuilder.isNotNull(root.get("id"));
+        Specification<Utilisateur> spec = (root, query, criteriaBuilder) -> criteriaBuilder.isNotNull(root.get("id"));
+
         spec = spec.and(userSpecification.emailDifferent(connectedUserEmail));
-        if (!StringUtils.hasText(request.getPrenom()) &&
-                StringUtils.hasText(request.getStatut()) &&
+
+        // Vérifie si tous les champs de recherche sont vides ou nuls
+        boolean allFieldsEmptyOrNull = !StringUtils.hasText(request.getPrenom()) &&
+                !StringUtils.hasText(request.getStatut()) &&
                 !StringUtils.hasText(request.getNumTele()) &&
                 !StringUtils.hasText(request.getEmail()) &&
-                !StringUtils.hasText(request.getNom())) {
-            allFieldsEmptyOrNull = true;
+                !StringUtils.hasText(request.getNom());
+
+        if (allFieldsEmptyOrNull) {
+            return spec;
         }
 
-        else allFieldsEmptyOrNull = false;
-        if(allFieldsEmptyOrNull = false){
-            if (request.getEmail() != null) {
-                spec = spec.and(userSpecification.emailEquals(request.getEmail()));
-            }
+        if (StringUtils.hasText(request.getEmail())) {
+            spec = spec.and(userSpecification.emailEquals(request.getEmail()));
+        }
 
-            if (request.getPrenom() != null) {
-                spec = spec.and(userSpecification.firstNameLike(request.getPrenom()));
-            }
+        if (StringUtils.hasText(request.getPrenom())) {
+            spec = spec.and(userSpecification.firstNameLike(request.getPrenom()));
+        }
 
-            if (request.getNom() != null) {
-                spec = spec.and(userSpecification.lastNameLike(request.getNom()));
-            }
+        if (StringUtils.hasText(request.getNom())) {
+            spec = spec.and(userSpecification.lastNameLike(request.getNom()));
+        }
 
-            if (request.getStatut() != null) {
-                spec = spec.and(userSpecification.statusEqual(UserStatus.valueOf(request.getStatut())));
-            }
+        if (StringUtils.hasText(request.getStatut())) {
+            spec = spec.and(userSpecification.statusEqual(UserStatus.valueOf(request.getStatut())));
+        }
 
-            if (request.getNumTele() != null) {
-                spec = spec.and(userSpecification.telephoneNumberEquals(request.getNumTele()));
-            }
+        if (StringUtils.hasText(request.getNumTele())) {
+            spec = spec.and(userSpecification.telephoneNumberEquals(request.getNumTele()));
         }
 
         return spec;
-
     }
 
 }

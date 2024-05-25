@@ -30,11 +30,6 @@ public class UserController {
     @GetMapping(value = "/page")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Page<UserPageResponseDTO>> page( UserPageRequestDTO userPageRequestDTO) {
-        System.out.println("nom: "+userPageRequestDTO.getNom());
-        System.out.println("prenom: "+userPageRequestDTO.getPrenom());
-        System.out.println("email: "+userPageRequestDTO.getEmail());
-        System.out.println("statut: "+userPageRequestDTO.getStatut());
-
         return ResponseEntity.ok().body(userservice.getPage(userPageRequestDTO));
     }
     @GetMapping("admin/details/{id}")
@@ -50,7 +45,7 @@ public class UserController {
                 .body(userservice.editUser(user));
     }
     @PutMapping(value = "/profile/edit")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<EditUserProfileResponseDTO> editProfile(@RequestBody @Valid EditUserProfileRequestDTO user) {
         return ResponseEntity.ok() //KeycloakID
                 .body(userservice.editProfile(user));

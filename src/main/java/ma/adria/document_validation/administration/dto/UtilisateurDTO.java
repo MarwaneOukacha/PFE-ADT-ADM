@@ -2,6 +2,7 @@ package ma.adria.document_validation.administration.dto;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Getter
 @Setter
 public class UtilisateurDTO {
+    private UUID id;
 
     private String prenom;
 
