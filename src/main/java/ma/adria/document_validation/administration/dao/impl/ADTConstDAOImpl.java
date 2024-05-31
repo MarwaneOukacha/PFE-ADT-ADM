@@ -73,12 +73,12 @@ public class ADTConstDAOImpl implements IADTConstDAO {
     }
 
     @Override
-    public String getADTConstValueByCode(ADTConstCode code) {
+    public ADTConst getADTConstValueByCode(ADTConstCode code) {
 
         ADTConst adtConst = adtConstRepository.findADTConstByCode(code)
                 .orElseThrow(() -> new ResourceNotFoundException(ErrorCode.ADT_CONST_NOT_FOUND_CODE));
 
-        return adtConst.getValue();
+        return adtConst;
 
     }
 

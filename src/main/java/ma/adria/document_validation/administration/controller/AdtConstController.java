@@ -22,7 +22,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @Validated
-@CrossOrigin(origins = "http://localhost:3000")
 public class AdtConstController {
 
     private final IADTConstService adtConstService;
@@ -44,7 +43,11 @@ public class AdtConstController {
         return ResponseEntity.ok()
                 .body(adtConstService.getADTConstById(id));
     }
-
+    @GetMapping(value = "/code")
+    public ResponseEntity<ADTConstResponseDTO> getADTConstByCode(@RequestParam String code) {
+        return ResponseEntity.ok()
+                .body(adtConstService.getADTConstByCode(code));
+    }
 
 
     @GetMapping(value = "/all")

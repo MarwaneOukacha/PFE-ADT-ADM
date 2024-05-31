@@ -23,6 +23,6 @@ public interface IADTConstDAO {
 
     Page<ADTConst> findADTConstPage(Specification<ADTConst> specification, Pageable pageable);
 
-    String getADTConstValueByCode(ADTConstCode code);
+    ADTConst getADTConstValueByCode(ADTConstCode code);
 
 }

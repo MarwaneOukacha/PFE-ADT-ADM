@@ -148,16 +148,12 @@ public class UserServiceImpl implements UserService {
         if (request.getNewPassword() == null) {
             throw new GenericException(ErrorCode.ACCOUNT_USER_NEW_PASSWORD_MISSING);
         }
-
-
         if (!passwordencoder.matches(request.getOldPassword(), encodedPassword)) {
             throw new GenericException(ErrorCode.ACCOUNT_USER_OLD_PASSWORD_INCORRECT);
         }
-
         if (passwordencoder.matches(request.getNewPassword(), encodedPassword)) {
             throw new GenericException(ErrorCode.ACCOUNT_USER_RESET_OLD_PASSWORD_MATCH);
         }
-
         Utilisateur user = userDAO.findById(connectedUser.getId());
 
         user.setPassword(passwordencoder.encode(request.getNewPassword()));

@@ -9,6 +9,7 @@ import ma.adria.document_validation.administration.dto.response.ADTConst.ADTCons
 import ma.adria.document_validation.administration.dto.response.ADTConst.ADTConstResponseDTO;
 import ma.adria.document_validation.administration.mapper.ADTConstMapper;
 import ma.adria.document_validation.administration.model.entities.ADTConst;
+import ma.adria.document_validation.administration.model.enums.ADTConstCode;
 import ma.adria.document_validation.administration.reposetiry.specifications.AdtConstSpecification;
 import ma.adria.document_validation.administration.services.adtconstants.IADTConstService;
 import org.springframework.data.domain.Page;
@@ -93,6 +94,10 @@ public class ADTConstServiceImpl implements IADTConstService {
 
     }
 
+    @Override
+    public ADTConstResponseDTO getADTConstByCode(String code) {
+        return adtConstMapper.mapADTConstToADTConstResponseDTO(adtConstDAO.getADTConstValueByCode(ADTConstCode.valueOf(code)));
+    }
 
 
     private Specification<ADTConst> getAdtConstSpecification(AdtConstPageRequestDTO request) {

@@ -10,6 +10,7 @@ import java.util.UUID;
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter
 public class ClientDetailsResponseDTO {
+    private String secret;
     protected UUID id;
     private String codeApp;
     private clientStatus statut;

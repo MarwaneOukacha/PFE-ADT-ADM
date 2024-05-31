@@ -24,4 +24,5 @@ public interface IADTConstService {
     Page<ADTConstResponseDTO> getADTConstPage(AdtConstPageRequestDTO adtConstPageRequestDTO);
 
 
+    ADTConstResponseDTO getADTConstByCode(String code);
 }

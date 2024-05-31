@@ -32,7 +32,6 @@ public class ClientAppController {
     }
     @GetMapping("/details/{id}")
     public ClientDetailsResponseDTO getClientDetails(@PathVariable String id){
-        System.out.println(id);
         return clientService.getClientById(id);
     }
 }

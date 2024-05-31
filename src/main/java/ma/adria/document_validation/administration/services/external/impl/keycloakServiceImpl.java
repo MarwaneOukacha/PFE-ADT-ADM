@@ -117,7 +117,7 @@ public class keycloakServiceImpl implements KeycloakService {
                 request,
                 String.class
         );
-        if (response.getStatusCode() == HttpStatus.CREATED) {
+        if (response.getStatusCode() == HttpStatus.NO_CONTENT) {
             log.info("Utilisateur modifié avec succès ! ");
         } else {
             throw new RuntimeException("Erreur lors de la modification de l'utilisateur : " + response.getBody());
