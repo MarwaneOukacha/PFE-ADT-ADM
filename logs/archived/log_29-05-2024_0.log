@@ -1,0 +1,574 @@
+[WARN ] 2024-05-29 08:46:11.257 - c.z.hikari.pool.HikariPool- run - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11h38m2s317ms463µs900ns).
+[INFO ] 2024-05-29 08:49:34.252 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 08:54:34.258 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 09:10:43.992 - o.h.v.internal.util.Version- <clinit> - HV000001: Hibernate Validator 6.2.0.Final
+[INFO ] 2024-05-29 09:10:44.040 - m.a.d.a.ESignDocQrcodeUsersApplication- logStarting - Starting ESignDocQrcodeUsersApplication using Java 19.0.2 on DESKTOP-2MD099A with PID 16932 (C:\Users\user\Downloads\Project-esignValidation\adt-dv-administration\target\classes started by user in C:\Users\user\Downloads\Project-esignValidation\adt-dv-administration)
+[INFO ] 2024-05-29 09:10:44.042 - m.a.d.a.ESignDocQrcodeUsersApplication- logStartupProfileInfo - No active profile set, falling back to default profiles: default
+[INFO ] 2024-05-29 09:10:44.230 - o.s.b.c.c.ConfigDataLoader- logTo - Fetching config from server at : http://localhost:8788
+[INFO ] 2024-05-29 09:10:44.231 - o.s.b.c.c.ConfigDataLoader- logTo - Located environment: name=Administration, profiles=[default], label=null, version=null, state=null
+[INFO ] 2024-05-29 09:10:45.861 - o.s.d.r.c.RepositoryConfigurationDelegate- registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO ] 2024-05-29 09:10:46.168 - o.s.d.r.c.RepositoryConfigurationDelegate- registerRepositoriesIn - Finished Spring Data repository scanning in 297 ms. Found 3 JPA repository interfaces.
+[INFO ] 2024-05-29 09:10:46.564 - o.s.c.c.scope.GenericScope- setSerializationId - BeanFactory id=769b0fe6-a2bb-3c25-b916-5f3bcb76aa90
+[INFO ] 2024-05-29 09:10:46.838 - o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- postProcessAfterInitialization - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@1304e0d7' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO ] 2024-05-29 09:10:46.845 - o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- postProcessAfterInitialization - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO ] 2024-05-29 09:10:47.301 - o.s.b.w.e.t.TomcatWebServer- initialize - Tomcat initialized with port(s): 2345 (http)
+[INFO ] 2024-05-29 09:10:47.317 - o.a.c.http11.Http11NioProtocol- log - Initializing ProtocolHandler ["http-nio-2345"]
+[INFO ] 2024-05-29 09:10:47.318 - o.a.c.core.StandardService- log - Starting service [Tomcat]
+[INFO ] 2024-05-29 09:10:47.322 - o.a.c.core.StandardEngine- log - Starting Servlet engine: [Apache Tomcat/9.0.46]
+[INFO ] 2024-05-29 09:10:47.551 - o.a.c.c.C.[.[localhost].[/]- log - Initializing Spring embedded WebApplicationContext
+[INFO ] 2024-05-29 09:10:47.552 - o.s.b.w.s.c.ServletWebServerApplicationContext- prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 3318 ms
+[INFO ] 2024-05-29 09:10:47.745 - c.z.hikari.HikariDataSource- getConnection - HikariPool-1 - Starting...
+[ERROR] 2024-05-29 09:10:48.834 - c.z.hikari.pool.HikariPool- throwPoolInitializationException - HikariPool-1 - Exception during pool initialization.
+org.postgresql.util.PSQLException: Connection to localhost:8001 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:303)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:51)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:223)
+	at org.postgresql.Driver.makeConnection(Driver.java:465)
+	at org.postgresql.Driver.connect(Driver.java:264)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:364)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:158)
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:116)
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:79)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:330)
+	at org.springframework.boot.jdbc.EmbeddedDatabaseConnection.isEmbedded(EmbeddedDatabaseConnection.java:184)
+	at org.springframework.boot.jdbc.init.DataSourceScriptDatabaseInitializer.isEmbeddedDatabase(DataSourceScriptDatabaseInitializer.java:64)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.isEnabled(AbstractScriptDatabaseInitializer.java:87)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.initializeDatabase(AbstractScriptDatabaseInitializer.java:74)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.afterPropertiesSet(AbstractScriptDatabaseInitializer.java:65)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1845)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at ma.adria.document_validation.administration.ESignDocQrcodeUsersApplication.main(ESignDocQrcodeUsersApplication.java:25)
+Caused by: java.net.ConnectException: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:535)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:585)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:666)
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:231)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:95)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:98)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:213)
+	... 40 common frames omitted
+[INFO ] 2024-05-29 09:10:48.977 - o.h.j.internal.util.LogHelper- logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO ] 2024-05-29 09:10:49.178 - org.hibernate.Version- logVersion - HHH000412: Hibernate ORM core version 5.4.32.Final
+[INFO ] 2024-05-29 09:10:49.522 - o.h.annotations.common.Version- <clinit> - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[INFO ] 2024-05-29 09:10:49.718 - c.z.hikari.HikariDataSource- getConnection - HikariPool-1 - Starting...
+[ERROR] 2024-05-29 09:10:50.725 - c.z.hikari.pool.HikariPool- throwPoolInitializationException - HikariPool-1 - Exception during pool initialization.
+org.postgresql.util.PSQLException: Connection to localhost:8001 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:303)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:51)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:223)
+	at org.postgresql.Driver.makeConnection(Driver.java:465)
+	at org.postgresql.Driver.connect(Driver.java:264)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:364)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:152)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:176)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1224)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1255)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1845)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at ma.adria.document_validation.administration.ESignDocQrcodeUsersApplication.main(ESignDocQrcodeUsersApplication.java:25)
+Caused by: java.net.ConnectException: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:535)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:585)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:666)
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:231)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:95)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:98)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:213)
+	... 50 common frames omitted
+[WARN ] 2024-05-29 09:10:50.725 - o.h.e.j.e.i.JdbcEnvironmentInitiator- initiateService - HHH000342: Could not obtain connection to query metadata
+org.postgresql.util.PSQLException: Connection to localhost:8001 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:303)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:51)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:223)
+	at org.postgresql.Driver.makeConnection(Driver.java:465)
+	at org.postgresql.Driver.connect(Driver.java:264)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:364)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:152)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:176)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1224)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1255)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1845)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at ma.adria.document_validation.administration.ESignDocQrcodeUsersApplication.main(ESignDocQrcodeUsersApplication.java:25)
+Caused by: java.net.ConnectException: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:535)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:585)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:666)
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:231)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:95)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:98)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:213)
+	... 50 common frames omitted
+[ERROR] 2024-05-29 09:10:50.731 - o.s.o.j.LocalContainerEntityManagerFactoryBean- buildNativeEntityManagerFactory - Failed to initialize JPA EntityManagerFactory: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+[WARN ] 2024-05-29 09:10:50.732 - o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext- refresh - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+[INFO ] 2024-05-29 09:10:50.738 - o.a.c.core.StandardService- log - Stopping service [Tomcat]
+[INFO ] 2024-05-29 09:10:50.753 - o.s.b.a.l.ConditionEvaluationReportLoggingListener- logMessage - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[ERROR] 2024-05-29 09:10:50.782 - o.s.boot.SpringApplication- reportFailure - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332)
+	at ma.adria.document_validation.administration.ESignDocQrcodeUsersApplication.main(ESignDocQrcodeUsersApplication.java:25)
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:275)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:152)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:176)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1224)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1255)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1845)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	... 16 common frames omitted
+Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.determineDialect(DialectFactoryImpl.java:100)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:54)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:137)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	... 33 common frames omitted
+[INFO ] 2024-05-29 09:13:51.944 - o.h.v.internal.util.Version- <clinit> - HV000001: Hibernate Validator 6.2.0.Final
+[INFO ] 2024-05-29 09:13:51.983 - m.a.d.a.ESignDocQrcodeUsersApplication- logStarting - Starting ESignDocQrcodeUsersApplication using Java 19.0.2 on DESKTOP-2MD099A with PID 21436 (C:\Users\user\Downloads\Project-esignValidation\adt-dv-administration\target\classes started by user in C:\Users\user\Downloads\Project-esignValidation\adt-dv-administration)
+[INFO ] 2024-05-29 09:13:51.984 - m.a.d.a.ESignDocQrcodeUsersApplication- logStartupProfileInfo - No active profile set, falling back to default profiles: default
+[INFO ] 2024-05-29 09:13:52.138 - o.s.b.c.c.ConfigDataLoader- logTo - Fetching config from server at : http://localhost:8788
+[INFO ] 2024-05-29 09:13:52.138 - o.s.b.c.c.ConfigDataLoader- logTo - Located environment: name=Administration, profiles=[default], label=null, version=null, state=null
+[INFO ] 2024-05-29 09:13:55.113 - o.s.d.r.c.RepositoryConfigurationDelegate- registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO ] 2024-05-29 09:13:55.704 - o.s.d.r.c.RepositoryConfigurationDelegate- registerRepositoriesIn - Finished Spring Data repository scanning in 567 ms. Found 3 JPA repository interfaces.
+[INFO ] 2024-05-29 09:13:56.668 - o.s.c.c.scope.GenericScope- setSerializationId - BeanFactory id=769b0fe6-a2bb-3c25-b916-5f3bcb76aa90
+[INFO ] 2024-05-29 09:13:57.354 - o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- postProcessAfterInitialization - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@341c6ac2' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO ] 2024-05-29 09:13:57.371 - o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- postProcessAfterInitialization - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO ] 2024-05-29 09:13:58.278 - o.s.b.w.e.t.TomcatWebServer- initialize - Tomcat initialized with port(s): 2345 (http)
+[INFO ] 2024-05-29 09:13:58.313 - o.a.c.http11.Http11NioProtocol- log - Initializing ProtocolHandler ["http-nio-2345"]
+[INFO ] 2024-05-29 09:13:58.315 - o.a.c.core.StandardService- log - Starting service [Tomcat]
+[INFO ] 2024-05-29 09:13:58.316 - o.a.c.core.StandardEngine- log - Starting Servlet engine: [Apache Tomcat/9.0.46]
+[INFO ] 2024-05-29 09:13:58.790 - o.a.c.c.C.[.[localhost].[/]- log - Initializing Spring embedded WebApplicationContext
+[INFO ] 2024-05-29 09:13:58.798 - o.s.b.w.s.c.ServletWebServerApplicationContext- prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 6657 ms
+[INFO ] 2024-05-29 09:13:59.154 - c.z.hikari.HikariDataSource- getConnection - HikariPool-1 - Starting...
+[INFO ] 2024-05-29 09:14:00.013 - c.z.hikari.HikariDataSource- getConnection - HikariPool-1 - Start completed.
+[INFO ] 2024-05-29 09:14:00.347 - o.h.j.internal.util.LogHelper- logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO ] 2024-05-29 09:14:00.525 - org.hibernate.Version- logVersion - HHH000412: Hibernate ORM core version 5.4.32.Final
+[INFO ] 2024-05-29 09:14:01.034 - o.h.annotations.common.Version- <clinit> - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[INFO ] 2024-05-29 09:14:01.600 - org.hibernate.dialect.Dialect- <init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+[INFO ] 2024-05-29 09:14:06.706 - o.h.e.t.j.p.i.JtaPlatformInitiator- initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[INFO ] 2024-05-29 09:14:06.738 - o.s.o.j.LocalContainerEntityManagerFactoryBean- buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2024-05-29 09:14:09.220 - o.s.s.w.DefaultSecurityFilterChain- <init> - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@27563444, org.springframework.security.web.context.SecurityContextPersistenceFilter@769c80d1, org.springframework.security.web.header.HeaderWriterFilter@1bd5b1c8, org.springframework.security.web.csrf.CsrfFilter@765e5a55, org.springframework.security.web.authentication.logout.LogoutFilter@55da6bf, org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter@516370c1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7cddc50f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1e60890c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@507e3e77, org.springframework.security.web.session.SessionManagementFilter@6ba516ff, org.springframework.security.web.access.ExceptionTranslationFilter@2f403d0a, org.springframework.security.web.access.intercept.AuthorizationFilter@41c56930]
+[WARN ] 2024-05-29 09:14:09.773 - o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration- openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2024-05-29 09:14:14.869 - o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration- restTemplateDiscoveryClientOptionalArgs - Eureka HTTP Client uses RestTemplate.
+[WARN ] 2024-05-29 09:14:15.737 - o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger- logWarning - Spring Cloud LoadBalancer is currently working with the default cache. You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+[INFO ] 2024-05-29 09:14:15.961 - o.s.c.n.e.InstanceInfoFactory- create - Setting initial instance status as: STARTING
+[INFO ] 2024-05-29 09:14:16.074 - c.n.discovery.DiscoveryClient- <init> - Initializing Eureka in region us-east-1
+[INFO ] 2024-05-29 09:14:16.088 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 09:14:16.156 - c.n.discovery.DiscoveryClient- fetchRegistry - Disable delta property : false
+[INFO ] 2024-05-29 09:14:16.157 - c.n.discovery.DiscoveryClient- fetchRegistry - Single vip registry refresh property : null
+[INFO ] 2024-05-29 09:14:16.158 - c.n.discovery.DiscoveryClient- fetchRegistry - Force full registry fetch : false
+[INFO ] 2024-05-29 09:14:16.158 - c.n.discovery.DiscoveryClient- fetchRegistry - Application is null : false
+[INFO ] 2024-05-29 09:14:16.158 - c.n.discovery.DiscoveryClient- fetchRegistry - Registered Applications size is zero : true
+[INFO ] 2024-05-29 09:14:16.159 - c.n.discovery.DiscoveryClient- fetchRegistry - Application version is -1: true
+[INFO ] 2024-05-29 09:14:16.159 - c.n.discovery.DiscoveryClient- getAndStoreFullRegistry - Getting all instance registry info from the eureka server
+[INFO ] 2024-05-29 09:14:17.009 - c.n.discovery.DiscoveryClient- getAndStoreFullRegistry - The response status is 200
+[INFO ] 2024-05-29 09:14:17.015 - c.n.discovery.DiscoveryClient- initScheduledTasks - Starting heartbeat executor: renew interval is: 30
+[INFO ] 2024-05-29 09:14:17.024 - c.n.d.InstanceInfoReplicator- <init> - InstanceInfoReplicator onDemand update allowed rate per min is 4
+[INFO ] 2024-05-29 09:14:17.036 - c.n.discovery.DiscoveryClient- <init> - Discovery Client initialized at timestamp 1716970457034 with initial instances count: 1
+[INFO ] 2024-05-29 09:14:17.063 - o.s.c.n.e.s.EurekaServiceRegistry- register - Registering application ADMINISTRATION with eureka with status UP
+[INFO ] 2024-05-29 09:14:17.071 - c.n.discovery.DiscoveryClient- notify - Saw local status change event StatusChangeEvent [timestamp=1716970457071, current=UP, previous=STARTING]
+[INFO ] 2024-05-29 09:14:17.074 - c.n.discovery.DiscoveryClient- register - DiscoveryClient_ADMINISTRATION/DESKTOP-2MD099A.mshome.net:Administration:2345: registering service...
+[INFO ] 2024-05-29 09:14:17.083 - o.a.c.http11.Http11NioProtocol- log - Starting ProtocolHandler ["http-nio-2345"]
+[INFO ] 2024-05-29 09:14:17.253 - c.n.discovery.DiscoveryClient- register - DiscoveryClient_ADMINISTRATION/DESKTOP-2MD099A.mshome.net:Administration:2345 - registration status: 204
+[INFO ] 2024-05-29 09:14:17.305 - o.s.b.w.e.t.TomcatWebServer- start - Tomcat started on port(s): 2345 (http) with context path ''
+[INFO ] 2024-05-29 09:14:17.306 - o.s.c.n.e.s.EurekaAutoServiceRegistration- onApplicationEvent - Updating port to 2345
+[INFO ] 2024-05-29 09:14:18.083 - m.a.d.a.ESignDocQrcodeUsersApplication- logStarted - Started ESignDocQrcodeUsersApplication in 29.447 seconds (JVM running for 31.931)
+[INFO ] 2024-05-29 09:19:16.182 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 09:24:16.281 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 09:29:16.283 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 09:30:30.704 - o.s.c.n.e.s.EurekaServiceRegistry- deregister - Unregistering application ADMINISTRATION with eureka with status DOWN
+[INFO ] 2024-05-29 09:30:30.704 - c.n.discovery.DiscoveryClient- notify - Saw local status change event StatusChangeEvent [timestamp=1716971430704, current=DOWN, previous=UP]
+[INFO ] 2024-05-29 09:30:30.705 - c.n.discovery.DiscoveryClient- register - DiscoveryClient_ADMINISTRATION/DESKTOP-2MD099A.mshome.net:Administration:2345: registering service...
+[INFO ] 2024-05-29 09:30:30.719 - c.n.discovery.DiscoveryClient- register - DiscoveryClient_ADMINISTRATION/DESKTOP-2MD099A.mshome.net:Administration:2345 - registration status: 204
+[INFO ] 2024-05-29 09:30:30.969 - o.s.o.j.LocalContainerEntityManagerFactoryBean- destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2024-05-29 09:30:30.990 - c.z.hikari.HikariDataSource- close - HikariPool-1 - Shutdown initiated...
+[INFO ] 2024-05-29 09:30:31.089 - c.z.hikari.HikariDataSource- close - HikariPool-1 - Shutdown completed.
+[INFO ] 2024-05-29 09:30:31.099 - c.n.discovery.DiscoveryClient- shutdown - Shutting down DiscoveryClient ...
+[INFO ] 2024-05-29 09:30:34.106 - c.n.discovery.DiscoveryClient- unregister - Unregistering ...
+[INFO ] 2024-05-29 09:30:34.132 - c.n.discovery.DiscoveryClient- unregister - DiscoveryClient_ADMINISTRATION/DESKTOP-2MD099A.mshome.net:Administration:2345 - deregister  status: 200
+[INFO ] 2024-05-29 09:30:34.141 - c.n.discovery.DiscoveryClient- shutdown - Completed shut down of DiscoveryClient
+[INFO ] 2024-05-29 09:30:43.657 - o.h.v.internal.util.Version- <clinit> - HV000001: Hibernate Validator 6.2.0.Final
+[INFO ] 2024-05-29 09:30:43.675 - m.a.d.a.ESignDocQrcodeUsersApplication- logStarting - Starting ESignDocQrcodeUsersApplication using Java 19.0.2 on DESKTOP-2MD099A with PID 9068 (C:\Users\user\Downloads\Project-esignValidation\adt-dv-administration\target\classes started by user in C:\Users\user\Downloads\Project-esignValidation\adt-dv-administration)
+[INFO ] 2024-05-29 09:30:43.676 - m.a.d.a.ESignDocQrcodeUsersApplication- logStartupProfileInfo - No active profile set, falling back to default profiles: default
+[INFO ] 2024-05-29 09:30:43.809 - o.s.b.c.c.ConfigDataLoader- logTo - Fetching config from server at : http://localhost:8788
+[INFO ] 2024-05-29 09:30:43.810 - o.s.b.c.c.ConfigDataLoader- logTo - Located environment: name=Administration, profiles=[default], label=null, version=null, state=null
+[INFO ] 2024-05-29 09:30:45.235 - o.s.d.r.c.RepositoryConfigurationDelegate- registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO ] 2024-05-29 09:30:45.580 - o.s.d.r.c.RepositoryConfigurationDelegate- registerRepositoriesIn - Finished Spring Data repository scanning in 336 ms. Found 3 JPA repository interfaces.
+[INFO ] 2024-05-29 09:30:46.051 - o.s.c.c.scope.GenericScope- setSerializationId - BeanFactory id=769b0fe6-a2bb-3c25-b916-5f3bcb76aa90
+[INFO ] 2024-05-29 09:30:46.352 - o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- postProcessAfterInitialization - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@736b21ee' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO ] 2024-05-29 09:30:46.363 - o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- postProcessAfterInitialization - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO ] 2024-05-29 09:30:46.945 - o.s.b.w.e.t.TomcatWebServer- initialize - Tomcat initialized with port(s): 2345 (http)
+[INFO ] 2024-05-29 09:30:46.961 - o.a.c.http11.Http11NioProtocol- log - Initializing ProtocolHandler ["http-nio-2345"]
+[INFO ] 2024-05-29 09:30:46.961 - o.a.c.core.StandardService- log - Starting service [Tomcat]
+[INFO ] 2024-05-29 09:30:46.962 - o.a.c.core.StandardEngine- log - Starting Servlet engine: [Apache Tomcat/9.0.46]
+[INFO ] 2024-05-29 09:30:47.193 - o.a.c.c.C.[.[localhost].[/]- log - Initializing Spring embedded WebApplicationContext
+[INFO ] 2024-05-29 09:30:47.195 - o.s.b.w.s.c.ServletWebServerApplicationContext- prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 3379 ms
+[INFO ] 2024-05-29 09:30:47.383 - c.z.hikari.HikariDataSource- getConnection - HikariPool-1 - Starting...
+[INFO ] 2024-05-29 09:30:47.578 - c.z.hikari.HikariDataSource- getConnection - HikariPool-1 - Start completed.
+[INFO ] 2024-05-29 09:30:47.743 - o.h.j.internal.util.LogHelper- logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO ] 2024-05-29 09:30:47.930 - org.hibernate.Version- logVersion - HHH000412: Hibernate ORM core version 5.4.32.Final
+[INFO ] 2024-05-29 09:30:48.235 - o.h.annotations.common.Version- <clinit> - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[INFO ] 2024-05-29 09:30:48.483 - org.hibernate.dialect.Dialect- <init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+[INFO ] 2024-05-29 09:30:49.799 - o.h.e.t.j.p.i.JtaPlatformInitiator- initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[INFO ] 2024-05-29 09:30:49.814 - o.s.o.j.LocalContainerEntityManagerFactoryBean- buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2024-05-29 09:30:51.047 - o.s.s.w.DefaultSecurityFilterChain- <init> - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@380cd266, org.springframework.security.web.context.SecurityContextPersistenceFilter@2a5d9ede, org.springframework.security.web.header.HeaderWriterFilter@22cca101, org.springframework.security.web.csrf.CsrfFilter@30b0d5a7, org.springframework.security.web.authentication.logout.LogoutFilter@672549f3, org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter@273e622f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2c3f81ef, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@374013e8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4b477121, org.springframework.security.web.session.SessionManagementFilter@3e356ed6, org.springframework.security.web.access.ExceptionTranslationFilter@5d3f583d, org.springframework.security.web.access.intercept.AuthorizationFilter@7cddc50f]
+[WARN ] 2024-05-29 09:30:51.493 - o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration- openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2024-05-29 09:30:53.734 - o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration- restTemplateDiscoveryClientOptionalArgs - Eureka HTTP Client uses RestTemplate.
+[WARN ] 2024-05-29 09:30:54.119 - o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger- logWarning - Spring Cloud LoadBalancer is currently working with the default cache. You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+[INFO ] 2024-05-29 09:30:54.204 - o.s.c.n.e.InstanceInfoFactory- create - Setting initial instance status as: STARTING
+[INFO ] 2024-05-29 09:30:54.259 - c.n.discovery.DiscoveryClient- <init> - Initializing Eureka in region us-east-1
+[INFO ] 2024-05-29 09:30:54.264 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 09:30:54.291 - c.n.discovery.DiscoveryClient- fetchRegistry - Disable delta property : false
+[INFO ] 2024-05-29 09:30:54.291 - c.n.discovery.DiscoveryClient- fetchRegistry - Single vip registry refresh property : null
+[INFO ] 2024-05-29 09:30:54.292 - c.n.discovery.DiscoveryClient- fetchRegistry - Force full registry fetch : false
+[INFO ] 2024-05-29 09:30:54.292 - c.n.discovery.DiscoveryClient- fetchRegistry - Application is null : false
+[INFO ] 2024-05-29 09:30:54.292 - c.n.discovery.DiscoveryClient- fetchRegistry - Registered Applications size is zero : true
+[INFO ] 2024-05-29 09:30:54.292 - c.n.discovery.DiscoveryClient- fetchRegistry - Application version is -1: true
+[INFO ] 2024-05-29 09:30:54.293 - c.n.discovery.DiscoveryClient- getAndStoreFullRegistry - Getting all instance registry info from the eureka server
+[INFO ] 2024-05-29 09:30:54.996 - c.n.discovery.DiscoveryClient- getAndStoreFullRegistry - The response status is 200
+[INFO ] 2024-05-29 09:30:55.002 - c.n.discovery.DiscoveryClient- initScheduledTasks - Starting heartbeat executor: renew interval is: 30
+[INFO ] 2024-05-29 09:30:55.011 - c.n.d.InstanceInfoReplicator- <init> - InstanceInfoReplicator onDemand update allowed rate per min is 4
+[INFO ] 2024-05-29 09:30:55.020 - c.n.discovery.DiscoveryClient- <init> - Discovery Client initialized at timestamp 1716971455018 with initial instances count: 2
+[INFO ] 2024-05-29 09:30:55.038 - o.s.c.n.e.s.EurekaServiceRegistry- register - Registering application ADMINISTRATION with eureka with status UP
+[INFO ] 2024-05-29 09:30:55.040 - c.n.discovery.DiscoveryClient- notify - Saw local status change event StatusChangeEvent [timestamp=1716971455040, current=UP, previous=STARTING]
+[INFO ] 2024-05-29 09:30:55.044 - c.n.discovery.DiscoveryClient- register - DiscoveryClient_ADMINISTRATION/DESKTOP-2MD099A:Administration:2345: registering service...
+[INFO ] 2024-05-29 09:30:55.051 - o.a.c.http11.Http11NioProtocol- log - Starting ProtocolHandler ["http-nio-2345"]
+[INFO ] 2024-05-29 09:30:55.123 - o.s.b.w.e.t.TomcatWebServer- start - Tomcat started on port(s): 2345 (http) with context path ''
+[INFO ] 2024-05-29 09:30:55.124 - o.s.c.n.e.s.EurekaAutoServiceRegistration- onApplicationEvent - Updating port to 2345
+[INFO ] 2024-05-29 09:30:55.150 - c.n.discovery.DiscoveryClient- register - DiscoveryClient_ADMINISTRATION/DESKTOP-2MD099A:Administration:2345 - registration status: 204
+[INFO ] 2024-05-29 09:30:55.635 - m.a.d.a.ESignDocQrcodeUsersApplication- logStarted - Started ESignDocQrcodeUsersApplication in 14.286 seconds (JVM running for 15.718)
+[INFO ] 2024-05-29 09:31:25.249 - o.a.c.c.C.[.[localhost].[/]- log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO ] 2024-05-29 09:31:25.249 - o.s.w.s.DispatcherServlet- initServletBean - Initializing Servlet 'dispatcherServlet'
+[INFO ] 2024-05-29 09:31:25.250 - o.s.w.s.DispatcherServlet- initServletBean - Completed initialization in 1 ms
+[INFO ] 2024-05-29 09:52:24.578 - m.a.d.a.ESignDocQrcodeUsersApplication- logStarting - Starting ESignDocQrcodeUsersApplication using Java 19.0.2 on DESKTOP-2MD099A with PID 3816 (C:\Users\user\Downloads\Project-esignValidation\adt-dv-administration\target\classes started by user in C:\Users\user\Downloads\Project-esignValidation\adt-dv-administration)
+[INFO ] 2024-05-29 09:52:24.583 - m.a.d.a.ESignDocQrcodeUsersApplication- logStartupProfileInfo - No active profile set, falling back to default profiles: default
+[INFO ] 2024-05-29 09:52:24.610 - o.h.v.internal.util.Version- <clinit> - HV000001: Hibernate Validator 6.2.0.Final
+[INFO ] 2024-05-29 09:52:24.714 - o.s.b.c.c.ConfigDataLoader- logTo - Fetching config from server at : http://localhost:8788
+[INFO ] 2024-05-29 09:52:24.714 - o.s.b.c.c.ConfigDataLoader- logTo - Located environment: name=Administration, profiles=[default], label=null, version=null, state=null
+[INFO ] 2024-05-29 09:52:27.870 - o.s.d.r.c.RepositoryConfigurationDelegate- registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO ] 2024-05-29 09:52:28.968 - o.s.d.r.c.RepositoryConfigurationDelegate- registerRepositoriesIn - Finished Spring Data repository scanning in 1059 ms. Found 3 JPA repository interfaces.
+[INFO ] 2024-05-29 09:52:30.186 - o.s.c.c.scope.GenericScope- setSerializationId - BeanFactory id=769b0fe6-a2bb-3c25-b916-5f3bcb76aa90
+[INFO ] 2024-05-29 09:52:31.135 - o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- postProcessAfterInitialization - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@79e10fb4' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO ] 2024-05-29 09:52:31.182 - o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- postProcessAfterInitialization - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO ] 2024-05-29 09:52:32.703 - o.s.b.w.e.t.TomcatWebServer- initialize - Tomcat initialized with port(s): 2345 (http)
+[INFO ] 2024-05-29 09:52:32.763 - o.a.c.http11.Http11NioProtocol- log - Initializing ProtocolHandler ["http-nio-2345"]
+[INFO ] 2024-05-29 09:52:32.764 - o.a.c.core.StandardService- log - Starting service [Tomcat]
+[INFO ] 2024-05-29 09:52:32.767 - o.a.c.core.StandardEngine- log - Starting Servlet engine: [Apache Tomcat/9.0.46]
+[INFO ] 2024-05-29 09:52:33.370 - o.a.c.c.C.[.[localhost].[/]- log - Initializing Spring embedded WebApplicationContext
+[INFO ] 2024-05-29 09:52:33.371 - o.s.b.w.s.c.ServletWebServerApplicationContext- prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 8655 ms
+[INFO ] 2024-05-29 09:52:36.948 - c.z.hikari.HikariDataSource- getConnection - HikariPool-1 - Starting...
+[INFO ] 2024-05-29 09:52:37.331 - c.z.hikari.HikariDataSource- getConnection - HikariPool-1 - Start completed.
+[INFO ] 2024-05-29 09:52:37.626 - o.h.j.internal.util.LogHelper- logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO ] 2024-05-29 09:52:37.820 - org.hibernate.Version- logVersion - HHH000412: Hibernate ORM core version 5.4.32.Final
+[INFO ] 2024-05-29 09:52:38.298 - o.h.annotations.common.Version- <clinit> - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[INFO ] 2024-05-29 09:52:38.745 - org.hibernate.dialect.Dialect- <init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+[INFO ] 2024-05-29 09:52:41.357 - o.h.e.t.j.p.i.JtaPlatformInitiator- initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[INFO ] 2024-05-29 09:52:41.382 - o.s.o.j.LocalContainerEntityManagerFactoryBean- buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2024-05-29 09:52:43.548 - o.s.s.w.DefaultSecurityFilterChain- <init> - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6ba516ff, org.springframework.security.web.context.SecurityContextPersistenceFilter@5d3f583d, org.springframework.security.web.header.HeaderWriterFilter@3bfead8d, org.springframework.security.web.csrf.CsrfFilter@62818ab0, org.springframework.security.web.authentication.logout.LogoutFilter@3c00da24, org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter@4791d904, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@22cca101, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1722ede1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3bbb3c84, org.springframework.security.web.session.SessionManagementFilter@adbc3bc, org.springframework.security.web.access.ExceptionTranslationFilter@4512f5f1, org.springframework.security.web.access.intercept.AuthorizationFilter@1bd5b1c8]
+[WARN ] 2024-05-29 09:52:44.052 - o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration- openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2024-05-29 09:52:48.098 - o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration- restTemplateDiscoveryClientOptionalArgs - Eureka HTTP Client uses RestTemplate.
+[WARN ] 2024-05-29 09:52:48.856 - o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger- logWarning - Spring Cloud LoadBalancer is currently working with the default cache. You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+[INFO ] 2024-05-29 09:52:49.010 - o.s.c.n.e.InstanceInfoFactory- create - Setting initial instance status as: STARTING
+[INFO ] 2024-05-29 09:52:49.138 - c.n.discovery.DiscoveryClient- <init> - Initializing Eureka in region us-east-1
+[INFO ] 2024-05-29 09:52:49.151 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 09:52:49.209 - c.n.discovery.DiscoveryClient- fetchRegistry - Disable delta property : false
+[INFO ] 2024-05-29 09:52:49.210 - c.n.discovery.DiscoveryClient- fetchRegistry - Single vip registry refresh property : null
+[INFO ] 2024-05-29 09:52:49.211 - c.n.discovery.DiscoveryClient- fetchRegistry - Force full registry fetch : false
+[INFO ] 2024-05-29 09:52:49.211 - c.n.discovery.DiscoveryClient- fetchRegistry - Application is null : false
+[INFO ] 2024-05-29 09:52:49.211 - c.n.discovery.DiscoveryClient- fetchRegistry - Registered Applications size is zero : true
+[INFO ] 2024-05-29 09:52:49.216 - c.n.discovery.DiscoveryClient- fetchRegistry - Application version is -1: true
+[INFO ] 2024-05-29 09:52:49.216 - c.n.discovery.DiscoveryClient- getAndStoreFullRegistry - Getting all instance registry info from the eureka server
+[INFO ] 2024-05-29 09:52:49.931 - c.n.discovery.DiscoveryClient- getAndStoreFullRegistry - The response status is 200
+[INFO ] 2024-05-29 09:52:49.936 - c.n.discovery.DiscoveryClient- initScheduledTasks - Starting heartbeat executor: renew interval is: 30
+[INFO ] 2024-05-29 09:52:49.941 - c.n.d.InstanceInfoReplicator- <init> - InstanceInfoReplicator onDemand update allowed rate per min is 4
+[INFO ] 2024-05-29 09:52:49.956 - c.n.discovery.DiscoveryClient- <init> - Discovery Client initialized at timestamp 1716972769953 with initial instances count: 1
+[INFO ] 2024-05-29 09:52:49.969 - o.s.c.n.e.s.EurekaServiceRegistry- register - Registering application ADMINISTRATION with eureka with status UP
+[INFO ] 2024-05-29 09:52:49.971 - c.n.discovery.DiscoveryClient- notify - Saw local status change event StatusChangeEvent [timestamp=1716972769971, current=UP, previous=STARTING]
+[INFO ] 2024-05-29 09:52:49.974 - c.n.discovery.DiscoveryClient- register - DiscoveryClient_ADMINISTRATION/DESKTOP-2MD099A:Administration:2345: registering service...
+[INFO ] 2024-05-29 09:52:49.975 - o.a.c.http11.Http11NioProtocol- log - Starting ProtocolHandler ["http-nio-2345"]
+[INFO ] 2024-05-29 09:52:50.039 - o.s.b.w.e.t.TomcatWebServer- start - Tomcat started on port(s): 2345 (http) with context path ''
+[INFO ] 2024-05-29 09:52:50.045 - o.s.c.n.e.s.EurekaAutoServiceRegistration- onApplicationEvent - Updating port to 2345
+[INFO ] 2024-05-29 09:52:50.061 - c.n.discovery.DiscoveryClient- register - DiscoveryClient_ADMINISTRATION/DESKTOP-2MD099A:Administration:2345 - registration status: 204
+[INFO ] 2024-05-29 09:52:50.765 - m.a.d.a.ESignDocQrcodeUsersApplication- logStarted - Started ESignDocQrcodeUsersApplication in 34.34 seconds (JVM running for 36.8)
+[INFO ] 2024-05-29 09:57:30.730 - o.a.c.c.C.[.[localhost].[/]- log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO ] 2024-05-29 09:57:30.730 - o.s.w.s.DispatcherServlet- initServletBean - Initializing Servlet 'dispatcherServlet'
+[INFO ] 2024-05-29 09:57:30.732 - o.s.w.s.DispatcherServlet- initServletBean - Completed initialization in 2 ms
+[INFO ] 2024-05-29 09:57:49.230 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 10:02:49.247 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 10:07:49.254 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 10:12:49.267 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 10:17:49.282 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 10:22:49.294 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 10:27:49.311 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 10:32:49.318 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 10:37:49.330 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 10:42:49.344 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 10:47:49.352 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 10:52:49.371 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 10:57:49.378 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 11:02:49.387 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 11:07:49.397 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 11:12:49.399 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 11:17:49.405 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 11:22:49.414 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 11:27:49.418 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 11:32:49.426 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 11:37:49.431 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 11:42:49.441 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 11:47:49.453 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 11:52:49.457 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 11:57:49.466 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 12:02:49.481 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 12:07:49.538 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 12:12:49.549 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 12:17:49.564 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[WARN ] 2024-05-29 14:21:27.727 - c.z.hikari.pool.HikariPool- run - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h2m46s972ms788µs).
+[INFO ] 2024-05-29 14:25:06.437 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 14:30:06.439 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 14:35:06.450 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 14:40:06.460 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 14:45:06.476 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 14:50:06.485 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 14:55:06.512 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 15:00:06.526 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 15:05:06.551 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 15:10:06.561 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 15:15:06.569 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 15:20:06.582 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 15:25:06.723 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 15:30:06.733 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 15:35:06.740 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 15:40:06.741 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 15:45:06.758 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 15:50:06.765 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 15:55:06.769 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 16:00:06.781 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 16:05:06.786 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 16:10:06.806 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 16:15:06.825 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 16:20:06.827 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 16:25:06.844 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 16:30:06.847 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 16:35:06.855 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 16:40:06.858 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 16:45:06.870 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 16:48:13.428 - o.s.c.n.e.s.EurekaServiceRegistry- deregister - Unregistering application ADMINISTRATION with eureka with status DOWN
+[INFO ] 2024-05-29 16:48:13.434 - c.n.discovery.DiscoveryClient- notify - Saw local status change event StatusChangeEvent [timestamp=1716997693434, current=DOWN, previous=UP]
+[INFO ] 2024-05-29 16:48:13.440 - c.n.discovery.DiscoveryClient- register - DiscoveryClient_ADMINISTRATION/DESKTOP-2MD099A:Administration:2345: registering service...
+[INFO ] 2024-05-29 16:48:13.463 - c.n.discovery.DiscoveryClient- register - DiscoveryClient_ADMINISTRATION/DESKTOP-2MD099A:Administration:2345 - registration status: 204
+[INFO ] 2024-05-29 16:48:13.661 - o.s.o.j.LocalContainerEntityManagerFactoryBean- destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2024-05-29 16:48:13.706 - c.z.hikari.HikariDataSource- close - HikariPool-1 - Shutdown initiated...
+[INFO ] 2024-05-29 16:48:13.729 - c.z.hikari.HikariDataSource- close - HikariPool-1 - Shutdown completed.
+[INFO ] 2024-05-29 16:48:13.736 - c.n.discovery.DiscoveryClient- shutdown - Shutting down DiscoveryClient ...
+[INFO ] 2024-05-29 16:48:16.780 - c.n.discovery.DiscoveryClient- unregister - Unregistering ...
+[INFO ] 2024-05-29 16:48:16.796 - c.n.discovery.DiscoveryClient- unregister - DiscoveryClient_ADMINISTRATION/DESKTOP-2MD099A:Administration:2345 - deregister  status: 200
+[INFO ] 2024-05-29 16:48:16.831 - c.n.discovery.DiscoveryClient- shutdown - Completed shut down of DiscoveryClient
+[INFO ] 2024-05-29 16:48:31.067 - o.h.v.internal.util.Version- <clinit> - HV000001: Hibernate Validator 6.2.0.Final
+[INFO ] 2024-05-29 16:48:31.085 - m.a.d.a.ESignDocQrcodeUsersApplication- logStarting - Starting ESignDocQrcodeUsersApplication using Java 19.0.2 on DESKTOP-2MD099A with PID 27304 (C:\Users\user\Downloads\Project-esignValidation\adt-dv-administration\target\classes started by user in C:\Users\user\Downloads\Project-esignValidation\adt-dv-administration)
+[INFO ] 2024-05-29 16:48:31.086 - m.a.d.a.ESignDocQrcodeUsersApplication- logStartupProfileInfo - No active profile set, falling back to default profiles: default
+[INFO ] 2024-05-29 16:48:31.183 - o.s.b.c.c.ConfigDataLoader- logTo - Fetching config from server at : http://localhost:8788
+[INFO ] 2024-05-29 16:48:31.185 - o.s.b.c.c.ConfigDataLoader- logTo - Located environment: name=Administration, profiles=[default], label=null, version=null, state=null
+[INFO ] 2024-05-29 16:48:32.964 - o.s.d.r.c.RepositoryConfigurationDelegate- registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO ] 2024-05-29 16:48:33.560 - o.s.d.r.c.RepositoryConfigurationDelegate- registerRepositoriesIn - Finished Spring Data repository scanning in 566 ms. Found 3 JPA repository interfaces.
+[INFO ] 2024-05-29 16:48:34.114 - o.s.c.c.scope.GenericScope- setSerializationId - BeanFactory id=769b0fe6-a2bb-3c25-b916-5f3bcb76aa90
+[INFO ] 2024-05-29 16:48:35.114 - o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- postProcessAfterInitialization - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@736b21ee' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO ] 2024-05-29 16:48:35.131 - o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- postProcessAfterInitialization - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO ] 2024-05-29 16:48:36.222 - o.s.b.w.e.t.TomcatWebServer- initialize - Tomcat initialized with port(s): 2345 (http)
+[INFO ] 2024-05-29 16:48:36.258 - o.a.c.http11.Http11NioProtocol- log - Initializing ProtocolHandler ["http-nio-2345"]
+[INFO ] 2024-05-29 16:48:36.275 - o.a.c.core.StandardService- log - Starting service [Tomcat]
+[INFO ] 2024-05-29 16:48:36.277 - o.a.c.core.StandardEngine- log - Starting Servlet engine: [Apache Tomcat/9.0.46]
+[INFO ] 2024-05-29 16:48:36.649 - o.a.c.c.C.[.[localhost].[/]- log - Initializing Spring embedded WebApplicationContext
+[INFO ] 2024-05-29 16:48:36.651 - o.s.b.w.s.c.ServletWebServerApplicationContext- prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 5462 ms
+[INFO ] 2024-05-29 16:48:36.868 - c.z.hikari.HikariDataSource- getConnection - HikariPool-1 - Starting...
+[INFO ] 2024-05-29 16:48:37.155 - c.z.hikari.HikariDataSource- getConnection - HikariPool-1 - Start completed.
+[INFO ] 2024-05-29 16:48:37.435 - o.h.j.internal.util.LogHelper- logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO ] 2024-05-29 16:48:37.575 - org.hibernate.Version- logVersion - HHH000412: Hibernate ORM core version 5.4.32.Final
+[INFO ] 2024-05-29 16:48:37.900 - o.h.annotations.common.Version- <clinit> - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[INFO ] 2024-05-29 16:48:38.239 - org.hibernate.dialect.Dialect- <init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+[INFO ] 2024-05-29 16:48:39.688 - o.h.e.t.j.p.i.JtaPlatformInitiator- initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[INFO ] 2024-05-29 16:48:39.703 - o.s.o.j.LocalContainerEntityManagerFactoryBean- buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[INFO ] 2024-05-29 16:48:40.956 - o.s.s.w.DefaultSecurityFilterChain- <init> - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7bbe5548, org.springframework.security.web.context.SecurityContextPersistenceFilter@386d41cb, org.springframework.security.web.header.HeaderWriterFilter@4e9d1119, org.springframework.security.web.csrf.CsrfFilter@e9947af, org.springframework.security.web.authentication.logout.LogoutFilter@21cb5648, org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter@76685ab0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4cb939d5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@30b0f674, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7305a443, org.springframework.security.web.session.SessionManagementFilter@65013d71, org.springframework.security.web.access.ExceptionTranslationFilter@5471342, org.springframework.security.web.access.intercept.AuthorizationFilter@4205d1c9]
+[WARN ] 2024-05-29 16:48:41.223 - o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration- openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO ] 2024-05-29 16:48:43.887 - o.s.c.n.e.c.DiscoveryClientOptionalArgsConfiguration- restTemplateDiscoveryClientOptionalArgs - Eureka HTTP Client uses RestTemplate.
+[WARN ] 2024-05-29 16:48:44.360 - o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger- logWarning - Spring Cloud LoadBalancer is currently working with the default cache. You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+[INFO ] 2024-05-29 16:48:44.545 - o.s.c.n.e.InstanceInfoFactory- create - Setting initial instance status as: STARTING
+[INFO ] 2024-05-29 16:48:44.669 - c.n.discovery.DiscoveryClient- <init> - Initializing Eureka in region us-east-1
+[INFO ] 2024-05-29 16:48:44.677 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 16:48:44.705 - c.n.discovery.DiscoveryClient- fetchRegistry - Disable delta property : false
+[INFO ] 2024-05-29 16:48:44.706 - c.n.discovery.DiscoveryClient- fetchRegistry - Single vip registry refresh property : null
+[INFO ] 2024-05-29 16:48:44.706 - c.n.discovery.DiscoveryClient- fetchRegistry - Force full registry fetch : false
+[INFO ] 2024-05-29 16:48:44.706 - c.n.discovery.DiscoveryClient- fetchRegistry - Application is null : false
+[INFO ] 2024-05-29 16:48:44.706 - c.n.discovery.DiscoveryClient- fetchRegistry - Registered Applications size is zero : true
+[INFO ] 2024-05-29 16:48:44.707 - c.n.discovery.DiscoveryClient- fetchRegistry - Application version is -1: true
+[INFO ] 2024-05-29 16:48:44.707 - c.n.discovery.DiscoveryClient- getAndStoreFullRegistry - Getting all instance registry info from the eureka server
+[INFO ] 2024-05-29 16:48:45.225 - c.n.discovery.DiscoveryClient- getAndStoreFullRegistry - The response status is 200
+[INFO ] 2024-05-29 16:48:45.228 - c.n.discovery.DiscoveryClient- initScheduledTasks - Starting heartbeat executor: renew interval is: 30
+[INFO ] 2024-05-29 16:48:45.232 - c.n.d.InstanceInfoReplicator- <init> - InstanceInfoReplicator onDemand update allowed rate per min is 4
+[INFO ] 2024-05-29 16:48:45.239 - c.n.discovery.DiscoveryClient- <init> - Discovery Client initialized at timestamp 1716997725238 with initial instances count: 2
+[INFO ] 2024-05-29 16:48:45.244 - o.s.c.n.e.s.EurekaServiceRegistry- register - Registering application ADMINISTRATION with eureka with status UP
+[INFO ] 2024-05-29 16:48:45.245 - c.n.discovery.DiscoveryClient- notify - Saw local status change event StatusChangeEvent [timestamp=1716997725245, current=UP, previous=STARTING]
+[INFO ] 2024-05-29 16:48:45.248 - c.n.discovery.DiscoveryClient- register - DiscoveryClient_ADMINISTRATION/DESKTOP-2MD099A:Administration:2345: registering service...
+[INFO ] 2024-05-29 16:48:45.248 - o.a.c.http11.Http11NioProtocol- log - Starting ProtocolHandler ["http-nio-2345"]
+[INFO ] 2024-05-29 16:48:45.311 - o.s.b.w.e.t.TomcatWebServer- start - Tomcat started on port(s): 2345 (http) with context path ''
+[INFO ] 2024-05-29 16:48:45.313 - o.s.c.n.e.s.EurekaAutoServiceRegistration- onApplicationEvent - Updating port to 2345
+[INFO ] 2024-05-29 16:48:45.319 - c.n.discovery.DiscoveryClient- register - DiscoveryClient_ADMINISTRATION/DESKTOP-2MD099A:Administration:2345 - registration status: 204
+[INFO ] 2024-05-29 16:48:45.770 - m.a.d.a.ESignDocQrcodeUsersApplication- logStarted - Started ESignDocQrcodeUsersApplication in 17.28 seconds (JVM running for 19.022)
+[INFO ] 2024-05-29 16:49:18.747 - o.a.c.c.C.[.[localhost].[/]- log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO ] 2024-05-29 16:49:18.748 - o.s.w.s.DispatcherServlet- initServletBean - Initializing Servlet 'dispatcherServlet'
+[INFO ] 2024-05-29 16:49:18.757 - o.s.w.s.DispatcherServlet- initServletBean - Completed initialization in 8 ms
+[INFO ] 2024-05-29 16:53:44.713 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 16:58:44.716 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 17:03:44.724 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 17:08:44.728 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 17:13:44.740 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 17:18:44.756 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 17:21:52.095 - m.a.d.a.s.e.i.keycloakServiceImpl- updatePassword - Utilisateur modifié avec succès ! 
+[INFO ] 2024-05-29 17:22:02.529 - m.a.d.a.s.e.i.keycloakServiceImpl- updatePassword - Utilisateur modifié avec succès ! 
+[INFO ] 2024-05-29 17:23:44.769 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 17:28:44.772 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 17:33:44.776 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 17:38:44.784 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[WARN ] 2024-05-29 20:18:00.064 - c.z.hikari.pool.HikariPool- run - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h38m51s286ms944µs400ns).
+[INFO ] 2024-05-29 20:22:06.052 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 20:27:06.063 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 20:32:06.075 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 20:37:06.103 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 20:42:06.112 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration
+[INFO ] 2024-05-29 20:47:06.124 - c.n.d.s.r.a.ConfigClusterResolver- getClusterEndpoints - Resolving eureka endpoints via configuration

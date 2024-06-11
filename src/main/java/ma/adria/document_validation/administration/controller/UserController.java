@@ -20,7 +20,6 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userservice;
-    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     @PostMapping("/add")
     public ResponseEntity<CreateUserResponseDTO> createUser(@RequestBody CreateUserRequestDTO user){
 
@@ -65,6 +64,10 @@ public class UserController {
    @GetMapping("/bykeycloak/{keycloakID}")
     public UtilisateurDTO getUserByKeycloakID(@PathVariable("keycloakID") String keyID){
        return userservice.getUserByKeycloakId(keyID);
+   }
+   @PostMapping("/test")
+    public void f(){
+        System.out.println("khdama");
    }
 }
 
